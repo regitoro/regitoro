@@ -1,171 +1,456 @@
+/* =========================================================
+   Portafolio - estilo minimalista oscuro
+   Para cambiar los colores, edita solo las variables de :root
+   ========================================================= */
+
+:root {
+    --fondo: #1e0a1b;
+    --superficie: #370f33;
+    --linea: #130c13;
+    --texto: #e6ecff;
+    --texto-suave: #93a0c2;
+    --azul: #db2ac4;
+    --cian: #e76cd7;
+    --degradado: linear-gradient(135deg, var(--azul), var(--cian));
+    --ancho: 1100px;
+    --curva: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f7fb;
-    color: #222;
-    line-height: 1.6;
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* para que el menú fijo no tape los títulos */
 }
 
-/* Navegación */
+body {
+    font-family: "DM Sans", system-ui, sans-serif;
+    background-color: var(--fondo);
+    color: var(--texto);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+    font-family: "Sora", system-ui, sans-serif;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+/* Foco visible para quien navega con teclado */
+a:focus-visible {
+    outline: 2px solid var(--cian);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* ---------- Navegación ---------- */
 
 header {
-    background-color: #111827;
-    color: white;
-    padding: 20px 8%;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: rgba(30, 10, 28, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--linea);
+    padding: 16px 8%;
 }
 
 nav {
+    max-width: var(--ancho);
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav h2 {
+    font-size: 1.1rem;
 }
 
 nav ul {
     display: flex;
-    gap: 25px;
+    gap: 28px;
     list-style: none;
 }
 
 nav a {
-    color: white;
+    position: relative;
+    color: var(--texto-suave);
     text-decoration: none;
+    font-size: 0.95rem;
+    padding: 4px 0;
+    transition: color 0.25s ease;
+}
+
+/* línea que crece de izquierda a derecha */
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--degradado);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--curva);
 }
 
 nav a:hover {
-    color: #60a5fa;
+    color: var(--texto);
 }
 
-/* Inicio */
+nav a:hover::after {
+    transform: scaleX(1);
+}
+
+/* ---------- Inicio ---------- */
 
 .inicio {
-    min-height: 80vh;
+    min-height: 85vh;
     display: flex;
     align-items: center;
-    padding: 60px 8%;
-    background-color: #e0ecff;
+    padding: 80px 8%;
+    background:
+        radial-gradient(circle at 85% 20%, rgba(34, 211, 238, 0.14), transparent 45%),
+        radial-gradient(circle at 10% 90%, rgba(59, 130, 246, 0.16), transparent 50%),
+        var(--fondo);
 }
 
-.inicio h1 {
-    font-size: 55px;
-    color: #111827;
-}
-
-.inicio h2 {
-    color: #2563eb;
-    margin-bottom: 15px;
+.inicio > div {
+    max-width: var(--ancho);
+    width: 100%;
+    margin: 0 auto;
 }
 
 .saludo {
-    color: #2563eb;
-    font-weight: bold;
+    color: var(--cian);
+    font-weight: 500;
+    margin-bottom: 8px;
 }
 
-.inicio p {
+.inicio h1 {
+    font-size: clamp(3rem, 9vw, 6.5rem);
+    font-weight: 700;
+    background: var(--degradado);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    margin-bottom: 12px;
+}
+
+.inicio h2 {
+    font-size: clamp(1.2rem, 3vw, 1.7rem);
+    font-weight: 400;
+    color: var(--texto);
+    margin-bottom: 12px;
+}
+
+.inicio p:not(.saludo) {
     max-width: 550px;
-    margin-bottom: 25px;
+    margin-bottom: 32px;
+    color: var(--texto-suave);
 }
 
-/* Botones */
+/* Única animación automática: la entrada del inicio, escalonada */
+.inicio > div > * {
+    opacity: 0;
+    animation: subir 0.8s var(--curva) forwards;
+}
+.inicio > div > :nth-child(1) { animation-delay: 0.1s; }
+.inicio > div > :nth-child(2) { animation-delay: 0.25s; }
+.inicio > div > :nth-child(3) { animation-delay: 0.4s; }
+.inicio > div > :nth-child(4) { animation-delay: 0.55s; }
+.inicio > div > :nth-child(5) { animation-delay: 0.7s; }
+
+@keyframes subir {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- Botones ---------- */
 
 .boton {
+    position: relative;
     display: inline-block;
-    background-color: #2563eb;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 6px;
+    overflow: hidden;
+    background: var(--degradado);
+    color: #04101f;
+    font-weight: 600;
+    padding: 12px 26px;
+    border-radius: 999px;
     text-decoration: none;
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
+    transition:
+        transform 0.25s var(--curva),
+        box-shadow 0.25s ease;
+}
+
+/* brillo que cruza el botón al pasar el cursor */
+.boton::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        100deg,
+        transparent,
+        rgba(255, 255, 255, 0.5),
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
 }
 
 .boton:hover {
-    background-color: #1d4ed8;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(34, 211, 238, 0.35);
 }
 
-/* Secciones */
+.boton:hover::before {
+    left: 130%;
+}
+
+/* efecto de "hundirse" al presionar */
+.boton:active {
+    transform: translateY(1px) scale(0.96);
+    box-shadow: 0 3px 10px rgba(59, 130, 246, 0.3);
+    transition-duration: 0.08s;
+}
+
+/* ---------- Secciones ---------- */
 
 .seccion {
-    padding: 70px 8%;
+    padding: 90px 8%;
+    border-top: 1px solid var(--linea);
+}
+
+.seccion > * {
+    max-width: var(--ancho);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .seccion h2 {
-    margin-bottom: 25px;
-    color: #111827;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    margin-bottom: 28px;
 }
 
-/* Habilidades */
+.seccion > p {
+    color: var(--texto-suave);
+    max-width: 650px;
+}
 
-.habilidades {
+.subtitulo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 48px;
+}
+
+/* ---------- Habilidades e idiomas ---------- */
+
+.habilidades,
+.idiomas {
     display: flex;
-    gap: 10px;
-    margin-top: 25px;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
 }
 
-.habilidades span {
-    background-color: #dbeafe;
-    color: #1d4ed8;
-    padding: 8px 15px;
-    border-radius: 20px;
-}
-
-/*idiomas*/
-.idiomas{
-    display: flex;
-    gap: 10px;
-    margin-top: 25px;
-}
-
+.habilidades span,
 .idiomas span {
-    background-color: #dbeafe;
-    color: #1d4ed8;
-    padding: 8px 15px;
-    border-radius: 20px;
+    background-color: var(--superficie);
+    color: var(--texto);
+    border: 1px solid var(--linea);
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    cursor: default;
+    transition:
+        transform 0.25s var(--curva),
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        color 0.25s ease;
 }
 
+.habilidades span:hover,
+.idiomas span:hover {
+    transform: translateY(-3px);
+    border-color: var(--cian);
+    color: var(--cian);
+    box-shadow: 0 8px 20px rgba(34, 211, 238, 0.15);
+}
 
-/* Proyectos */
+/* ---------- Proyectos ---------- */
 
 .proyectos {
-    display: flex;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
 }
 
 .proyecto {
-    background-color: white;
-    padding: 25px;
-    border-radius: 10px;
-    flex: 1;
-    box-shadow: 0 3px 10px #00000015;
+    background-color: var(--superficie);
+    border: 1px solid var(--linea);
+    padding: 28px;
+    border-radius: 14px;
+    transition:
+        transform 0.35s var(--curva),
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.proyecto:hover {
+    transform: translateY(-8px);
+    border-color: var(--azul);
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(59, 130, 246, 0.35),
+        0 0 30px rgba(59, 130, 246, 0.18);
 }
 
 .proyecto h3 {
     margin-bottom: 10px;
+    font-size: 1.25rem;
+}
+
+.proyecto p {
+    color: var(--texto-suave);
+    margin-bottom: 18px;
 }
 
 .proyecto a {
-    color: #2563eb;
+    position: relative;
+    display: inline-block;
+    color: var(--cian);
     text-decoration: none;
+    font-weight: 500;
+    padding-bottom: 2px;
 }
 
-/* Contacto */
+.proyecto a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--cian);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s var(--curva);
+}
+
+.proyecto a:hover::after {
+    transform: scaleX(1);
+}
+
+/* ---------- Contacto ---------- */
 
 .contacto {
     text-align: center;
-    background-color: #e0ecff;
+    background-color: var(--superficie);
 }
 
 .contacto p {
-    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 28px;
 }
 
-/* Footer */
+/* ---------- Footer ---------- */
 
 footer {
     text-align: center;
-    padding: 20px;
-    background-color: #111827;
+    padding: 28px;
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--linea);
+}
+
+/* ---------- Pantallas pequeñas ---------- */
+
+@media (max-width: 640px) {
+    header {
+        padding: 14px 6%;
+    }
+
+    nav ul {
+        gap: 16px;
+    }
+
+    .inicio,
+    .seccion {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .seccion {
+        padding-top: 64px;
+        padding-bottom: 64px;
+    }
+}
+
+/* ---------- Respeta a quien prefiere menos movimiento ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .inicio > div > * {
+        opacity: 1;
+    }
+}
+
+
+.split-flap {
+    display: inline-block;
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: 8px;
     color: white;
+    perspective: 500px;
+}
+
+
+#fluid-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+}
+
+#fluid {
+  width: 100vw;
+  height: 100vh;
+  display: block;
 }
