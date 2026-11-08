@@ -1272,3 +1272,47 @@ function init() {
 
 // Start when page loads
 window.addEventListener("load", init);
+
+
+// ---------- Barras de porcentaje (habilidades e idiomas) ----------
+// Lee data-nivel de cada .nivel, escribe el porcentaje y llena la barra
+// cuando la sección aparece en pantalla.
+const niveles = document.querySelectorAll(".nivel");
+
+niveles.forEach((nivel) => {
+    const valor = Math.max(0, Math.min(100, Number(nivel.dataset.nivel) || 0));
+    nivel.dataset.nivel = valor;
+    nivel.querySelector(".nivel-porcentaje").textContent = valor + "%";
+});
+
+function llenarBarra(nivel) {
+    nivel.querySelector(".nivel-relleno").style.width = nivel.dataset.nivel + "%";
+}
+
+if ("IntersectionObserver" in window) {
+    const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+            if (entrada.isIntersecting) {
+                llenarBarra(entrada.target);
+                observador.unobserve(entrada.target);
+            }
+        });
+    }, { threshold: 0.4 });
+
+    niveles.forEach((nivel) => observador.observe(nivel));
+} else {
+    niveles.forEach(llenarBarra);
+}
+
+
+// ---------- Recuadro "Imagen pendiente" (datos curiosos y proyectos) ----------
+// Si una imagen todavía no existe en img/datos-curiosos/ o img/proyectos/, se muestra un recuadro en su lugar.
+document.querySelectorAll(".dato-imagen img, .proyecto-imagen img").forEach((img) => {
+    const marcarPendiente = () => img.parentElement.classList.add("sin-imagen");
+
+    if (img.complete && img.naturalWidth === 0) {
+        marcarPendiente();
+    } else {
+        img.addEventListener("error", marcarPendiente);
+    }
+});

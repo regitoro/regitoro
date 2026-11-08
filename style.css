@@ -125,10 +125,35 @@ nav a:hover::after {
         var(--fondo);
 }
 
-.inicio > div {
+.inicio-contenido {
     max-width: var(--ancho);
     width: 100%;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+/* Apartado de notas a un lado del saludo */
+.inicio-notas {
+    background-color: var(--superficie);
+    border: 1px dashed var(--azul);
+    border-radius: 14px;
+    padding: 28px;
+    opacity: 0;
+    animation: subir 0.8s var(--curva) 0.85s forwards;
+}
+
+.inicio-notas h3 {
+    color: var(--cian);
+    margin-bottom: 12px;
+    font-size: 1.25rem;
+}
+
+.inicio aside.inicio-notas p {
+    margin-bottom: 0;
+    color: var(--texto-suave);
 }
 
 .saludo {
@@ -163,15 +188,15 @@ nav a:hover::after {
 }
 
 /* Única animación automática: la entrada del inicio, escalonada */
-.inicio > div > * {
+.inicio-texto > * {
     opacity: 0;
     animation: subir 0.8s var(--curva) forwards;
 }
-.inicio > div > :nth-child(1) { animation-delay: 0.1s; }
-.inicio > div > :nth-child(2) { animation-delay: 0.25s; }
-.inicio > div > :nth-child(3) { animation-delay: 0.4s; }
-.inicio > div > :nth-child(4) { animation-delay: 0.55s; }
-.inicio > div > :nth-child(5) { animation-delay: 0.7s; }
+.inicio-texto > :nth-child(1) { animation-delay: 0.1s; }
+.inicio-texto > :nth-child(2) { animation-delay: 0.25s; }
+.inicio-texto > :nth-child(3) { animation-delay: 0.4s; }
+.inicio-texto > :nth-child(4) { animation-delay: 0.55s; }
+.inicio-texto > :nth-child(5) { animation-delay: 0.7s; }
 
 @keyframes subir {
     from {
@@ -267,36 +292,149 @@ nav a:hover::after {
 
 /* ---------- Habilidades e idiomas ---------- */
 
-.habilidades,
-.idiomas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 24px;
+.niveles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
 }
 
-.habilidades span,
-.idiomas span {
+.tarjeta-niveles {
     background-color: var(--superficie);
-    color: var(--texto);
     border: 1px solid var(--linea);
-    padding: 8px 18px;
-    border-radius: 999px;
-    font-size: 0.95rem;
-    cursor: default;
+    border-radius: 14px;
+    padding: 28px;
     transition:
-        transform 0.25s var(--curva),
-        border-color 0.25s ease,
-        box-shadow 0.25s ease,
-        color 0.25s ease;
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
-.habilidades span:hover,
-.idiomas span:hover {
-    transform: translateY(-3px);
-    border-color: var(--cian);
+.tarjeta-niveles:hover {
+    border-color: var(--azul);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+}
+
+.tarjeta-niveles h3 {
     color: var(--cian);
-    box-shadow: 0 8px 20px rgba(34, 211, 238, 0.15);
+    font-size: 1.25rem;
+    margin-bottom: 24px;
+}
+
+.lista-niveles {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Nombre a la izquierda, porcentaje a la derecha, barra debajo */
+.nivel {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    row-gap: 8px;
+    align-items: baseline;
+}
+
+.nivel-nombre {
+    color: var(--texto);
+    font-weight: 500;
+}
+
+.nivel-porcentaje {
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.nivel-barra {
+    grid-column: 1 / -1;
+    height: 8px;
+    background-color: var(--fondo);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+/* El ancho lo pone script.js a partir de data-nivel */
+.nivel-relleno {
+    height: 100%;
+    width: 0;
+    background: var(--degradado);
+    border-radius: inherit;
+    transition: width 1.2s var(--curva);
+}
+
+/* ---------- Datos curiosos ---------- */
+
+.datos {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+}
+
+/* Imagen a la izquierda y texto a la derecha */
+.dato {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 40px;
+    align-items: center;
+}
+
+/* Uno sí y uno no: se invierte (texto a la izquierda, imagen a la derecha) */
+.dato:nth-child(even) {
+    grid-template-columns: 1.6fr 1fr;
+}
+
+.dato:nth-child(even) .dato-imagen {
+    order: 2;
+}
+
+.dato-imagen {
+    aspect-ratio: 4 / 3;
+    border-radius: 14px;
+    overflow: hidden;
+    background-color: var(--superficie);
+    border: 1px solid var(--linea);
+}
+
+.dato-imagen img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s var(--curva);
+}
+
+.dato:hover .dato-imagen img {
+    transform: scale(1.05);
+}
+
+/* Mientras no subas la imagen, se ve un recuadro de "Imagen pendiente" */
+.dato-imagen.sin-imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed var(--azul);
+}
+
+.dato-imagen.sin-imagen img {
+    display: none;
+}
+
+.dato-imagen.sin-imagen::after {
+    content: "Imagen pendiente";
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+}
+
+.dato-texto h3 {
+    color: var(--cian);
+    font-size: 1.35rem;
+    margin-bottom: 12px;
+}
+
+.dato-texto p {
+    color: var(--texto-suave);
+    line-height: 1.7;
 }
 
 /* ---------- Proyectos ---------- */
@@ -308,10 +446,12 @@ nav a:hover::after {
 }
 
 .proyecto {
+    display: flex;
+    flex-direction: column;
     background-color: var(--superficie);
     border: 1px solid var(--linea);
-    padding: 28px;
     border-radius: 14px;
+    overflow: hidden;
     transition:
         transform 0.35s var(--curva),
         border-color 0.35s ease,
@@ -327,6 +467,51 @@ nav a:hover::after {
         0 0 30px rgba(59, 130, 246, 0.18);
 }
 
+/* Imagen arriba, ocupando todo el ancho de la tarjeta */
+.proyecto-imagen {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background-color: var(--fondo);
+    border-bottom: 1px solid var(--linea);
+}
+
+.proyecto-imagen img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s var(--curva);
+}
+
+.proyecto:hover .proyecto-imagen img {
+    transform: scale(1.05);
+}
+
+/* Mientras no subas la imagen, se ve un recuadro de "Imagen pendiente" */
+.proyecto-imagen.sin-imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.proyecto-imagen.sin-imagen img {
+    display: none;
+}
+
+.proyecto-imagen.sin-imagen::after {
+    content: "Imagen pendiente";
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+}
+
+/* Título, descripción y enlaces debajo de la imagen */
+.proyecto-cuerpo {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 24px 28px 28px;
+}
+
 .proyecto h3 {
     margin-bottom: 10px;
     font-size: 1.25rem;
@@ -335,6 +520,14 @@ nav a:hover::after {
 .proyecto p {
     color: var(--texto-suave);
     margin-bottom: 18px;
+}
+
+/* Los enlaces quedan siempre al fondo, aunque las descripciones midan distinto */
+.proyecto-enlaces {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    margin-top: auto;
 }
 
 .proyecto a {
@@ -397,10 +590,26 @@ footer {
         gap: 16px;
     }
 
+    .inicio-contenido {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
     .inicio,
     .seccion {
         padding-left: 6%;
         padding-right: 6%;
+    }
+
+    /* En celular: imagen arriba y texto abajo, en todos los datos */
+    .dato,
+    .dato:nth-child(even) {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .dato:nth-child(even) .dato-imagen {
+        order: 0;
     }
 
     .seccion {
@@ -423,7 +632,8 @@ footer {
         transition-duration: 0.01ms !important;
     }
 
-    .inicio > div > * {
+    .inicio-texto > *,
+    .inicio-notas {
         opacity: 1;
     }
 }

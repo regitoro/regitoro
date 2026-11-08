@@ -17,7 +17,8 @@
 
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#sobre-mi">Sobre mí</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#datos-curiosos">Datos curiosos</a></li>
                 <li><a href="#proyectos">Proyectos</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
@@ -27,70 +28,203 @@
     <main>
 
         <section id="inicio" class="inicio">
-            <div>
-                <p class="saludo">Hola, soy</p>
-                <h1 class="split-flap">REGINA</h1>
-                <h2>Estudiante de la uvaq</h2>
-                <p>
-                    morelia
-                </p>
+            <div class="inicio-contenido">
+                <div class="inicio-texto">
+                    <p class="saludo">Hola, soy</p>
+                    <h1 class="split-flap">REGINA</h1>
+                    <h2>Estudiante de la uvaq</h2>
+                    <p>
+                        morelia
+                    </p>
 
-                <a href="#proyectos" class="boton">Ver proyectos</a>
+                    <a href="#proyectos" class="boton">Ver proyectos</a>
+                </div>
+
+                <!-- Apartado para escribir cosas sobre mí -->
+                <aside class="inicio-notas">
+                    <h3>Sobre mí</h3>
+                    <p>
+                        ✏️ Aquí irá lo que escribiré más adelante.
+                    </p>
+                </aside>
             </div>
         </section>
 
-        <section id="sobre-mi" class="seccion">
-            <h2>Sobre mí</h2>
+        <section id="habilidades" class="seccion">
+            <h2>Habilidades</h2>
 
             <p>
-                Soy una estudiante muy estudiosa de la uvaq morelia.
+                Aqui van mis habilidades, las cuales he ido adquiriendo a lo largo de mi formación académica y experiencia práctica.
             </p>
 
-            <div class="habilidades">
-                <span>Java</span>
-                <span>Html</span>
-                <span>Git</span>
-                <span>SQL</span>
+            <!--
+                Para cambiar un porcentaje, edita solo el número de data-nivel (0 a 100).
+                El texto del porcentaje y el largo de la barra se actualizan solos.
+            -->
+            <div class="niveles">
+
+                <article class="tarjeta-niveles">
+                    <h3>Habilidades técnicas</h3>
+                    <ul class="lista-niveles">
+                        <li class="nivel" data-nivel="70">
+                            <span class="nivel-nombre">Java</span>
+                            <span class="nivel-porcentaje"></span>
+                            <div class="nivel-barra"><div class="nivel-relleno"></div></div>
+                        </li>
+                        <li class="nivel" data-nivel="80">
+                            <span class="nivel-nombre">HTML</span>
+                            <span class="nivel-porcentaje"></span>
+                            <div class="nivel-barra"><div class="nivel-relleno"></div></div>
+                        </li>
+                        <li class="nivel" data-nivel="60">
+                            <span class="nivel-nombre">Git</span>
+                            <span class="nivel-porcentaje"></span>
+                            <div class="nivel-barra"><div class="nivel-relleno"></div></div>
+                        </li>
+                        <li class="nivel" data-nivel="50">
+                            <span class="nivel-nombre">SQL</span>
+                            <span class="nivel-porcentaje"></span>
+                            <div class="nivel-barra"><div class="nivel-relleno"></div></div>
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="tarjeta-niveles">
+                    <h3>Idiomas</h3>
+                    <ul class="lista-niveles">
+                        <li class="nivel" data-nivel="100">
+                            <span class="nivel-nombre">Español</span>
+                            <span class="nivel-porcentaje"></span>
+                            <div class="nivel-barra"><div class="nivel-relleno"></div></div>
+                        </li>
+                        <li class="nivel" data-nivel="70">
+                            <span class="nivel-nombre">Inglés</span>
+                            <span class="nivel-porcentaje"></span>
+                            <div class="nivel-barra"><div class="nivel-relleno"></div></div>
+                        </li>
+                        <li class="nivel" data-nivel="30">
+                            <span class="nivel-nombre">Italiano</span>
+                            <span class="nivel-porcentaje"></span>
+                            <div class="nivel-barra"><div class="nivel-relleno"></div></div>
+                        </li>
+                    </ul>
+                </article>
+
             </div>
 
-            <br><br>
-            <h2>Idiomas</h2>
+        </section>
 
-            <div class="idiomas">
-                <span>Espanol</span>
-                <span>Ingles</span>
-                <span>Italiano</span>
+        <section id="datos-curiosos" class="seccion">
+            <h2>Datos curiosos</h2>
+
+            <!--
+                Cada .dato tiene una imagen y un párrafo. Se alternan solos:
+                el 1º lleva la imagen a la izquierda, el 2º a la derecha, y así.
+                Las imágenes van en la carpeta img/datos-curiosos/
+                Para agregar otro dato, copia un <article class="dato"> completo.
+            -->
+            <div class="datos">
+
+                <article class="dato">
+                    <figure class="dato-imagen">
+                        <img src="img/datos-curiosos/dato-1.jpg" alt="Imagen del dato curioso 1">
+                        <!-- si subo una imagen png, cambiar el .jpg por .png -->
+                    </figure>
+                    <div class="dato-texto">
+                        <h3>Dato curioso #1</h3>
+                        <p>
+                            ✏️ Aquí irá el párrafo de mi primer dato curioso.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="dato">
+                    <figure class="dato-imagen">
+                        <img src="img/datos-curiosos/dato-2.jpg" alt="Imagen del dato curioso 2">
+                    </figure>
+                    <div class="dato-texto">
+                        <h3>Dato curioso #2</h3>
+                        <p>
+                            ✏️ Aquí irá el párrafo de mi segundo dato curioso.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="dato">
+                    <figure class="dato-imagen">
+                        <img src="img/datos-curiosos/dato-3.jpg" alt="Imagen del dato curioso 3">
+                    </figure>
+                    <div class="dato-texto">
+                        <h3>Dato curioso #3</h3>
+                        <p>
+                            ✏️ Aquí irá el párrafo de mi tercer dato curioso.
+                        </p>
+                    </div>
+                </article>
+
             </div>
-
         </section>
 
         <section id="proyectos" class="seccion">
             <h2>Mis proyectos</h2>
 
+            <!--
+                Cada tarjeta: imagen arriba, título y descripción, y dos enlaces.
+                - Imágenes: carpeta img/proyectos/ (proyecto-1.jpg, proyecto-2.jpg, ...)
+                - "Ver aquí": cambia el href="#" por el link de la página web del proyecto.
+                - "Ver repo de Git": cambia el href="#" por el link del repositorio,
+                  por ejemplo https://github.com/regitoro/nombre-del-repo
+                Los dos enlaces se abren en una pestaña nueva.
+            -->
             <div class="proyectos">
 
                 <article class="proyecto">
-                    <h3>Proyecto 1</h3>
-                    <p>
-                        ....
-                    </p>
-                    <a href="#">Ver proyecto</a>
+                    <figure class="proyecto-imagen">
+                        <img src="img/proyectos/proyecto-1.jpg" alt="Captura del proyecto 1">
+                    </figure>
+                    <div class="proyecto-cuerpo">
+                        <h3>Proyecto 1</h3>
+                        <p>
+                            ✏️ Aquí irá la descripción del proyecto 1.
+                        </p>
+                        <div class="proyecto-enlaces">
+                            <a href="#" target="_blank" rel="noopener noreferrer">Ver aquí</a>
+                            <!-- cambiar el # por el link del proyecto -->
+                            <a href="#" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                        </div>
+                    </div>
                 </article>
 
                 <article class="proyecto">
-                    <h3>Proyecto 2</h3>
-                    <p>
-                        ...
-                    </p>
-                    <a href="#">Ver proyecto</a>
+                    <figure class="proyecto-imagen">
+                        <img src="img/proyectos/proyecto-2.jpg" alt="Captura del proyecto 2">
+                    </figure>
+                    <div class="proyecto-cuerpo">
+                        <h3>Proyecto 2</h3>
+                        <p>
+                            ✏️ Aquí irá la descripción del proyecto 2.
+                        </p>
+                        <div class="proyecto-enlaces">
+                            <a href="#" target="_blank" rel="noopener noreferrer">Ver aquí</a>
+                            <a href="#" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                        </div>
+                    </div>
                 </article>
 
                 <article class="proyecto">
-                    <h3>Proyecto 3</h3>
-                    <p>
-                        ...
-                    </p>
-                    <a href="#">Ver proyecto</a>
+                    <figure class="proyecto-imagen">
+                        <img src="img/proyectos/proyecto-3.jpg" alt="Captura del proyecto 3">
+                    </figure>
+                    <div class="proyecto-cuerpo">
+                        <h3>Proyecto 3</h3>
+                        <p>
+                            ✏️ Aquí irá la descripción del proyecto 3.
+                        </p>
+                        <div class="proyecto-enlaces">
+                            <a href="#" target="_blank" rel="noopener noreferrer">Ver aquí</a>
+                            <a href="#" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                        </div>
+                    </div>
                 </article>
 
             </div>
