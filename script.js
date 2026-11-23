@@ -1316,3 +1316,176 @@ document.querySelectorAll(".dato-imagen img, .proyecto-imagen img").forEach((img
         img.addEventListener("error", marcarPendiente);
     }
 });
+
+
+// ---------- Mapa interactivo de México ----------
+// Los trazos de los estados vienen de mapa-mexico.js.
+// Rueda del mouse o pellizco = zoom, arrastrar = mover, botones = acercar / alejar / ir a Morelia / ver todo.
+(function iniciarMapa() {
+    const datos = window.MAPA_MEXICO;
+    const figura = document.getElementById("mapa");
+    if (!datos || !figura) return;
+
+    const NS = "http://www.w3.org/2000/svg";
+    const svg = figura.querySelector(".mapa-svg");
+    const capaZoom = svg.querySelector(".mapa-zoom");
+    const punto = svg.querySelector(".mapa-punto");
+    const tooltip = figura.querySelector(".mapa-tooltip");
+    const W = datos.ancho;
+    const H = datos.alto;
+    const [moreliaX, moreliaY] = datos.morelia;
+    const ZOOM_MIN = 1;
+    const ZOOM_MAX = 14;
+
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+
+    // Dibujar los estados
+    datos.estados.forEach((estado) => {
+        const path = document.createElementNS(NS, "path");
+        path.setAttribute("d", estado.d);
+        path.setAttribute("class", "mapa-estado" + (estado.id === "MX-MIC" ? " es-casa" : ""));
+        path.dataset.nombre = estado.nombre;
+        capaZoom.appendChild(path);
+    });
+
+    // Estado actual de la vista: escala k y desplazamiento (x, y)
+    let vista = { k: 1, x: 0, y: 0 };
+
+    const limitar = (v) => {
+        const k = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, v.k));
+        const x = Math.min(0, Math.max(W - W * k, v.x));
+        const y = Math.min(0, Math.max(H - H * k, v.y));
+        return { k, x, y };
+    };
+
+    const pintar = () => {
+        capaZoom.setAttribute("transform", `translate(${vista.x} ${vista.y}) scale(${vista.k})`);
+        // El punto se queda del mismo tamaño, solo cambia de lugar
+        punto.setAttribute("transform", `translate(${moreliaX * vista.k + vista.x} ${moreliaY * vista.k + vista.y})`);
+    };
+
+    // Zoom manteniendo fijo el punto (cx, cy) del mapa
+    const zoomEn = (factor, cx, cy) => {
+        const k = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, vista.k * factor));
+        const f = k / vista.k;
+        vista = limitar({ k, x: cx - (cx - vista.x) * f, y: cy - (cy - vista.y) * f });
+        pintar();
+    };
+
+    // Animación suave hacia una vista destino (para los botones)
+    let animacion = null;
+    const animarA = (destino) => {
+        destino = limitar(destino);
+        cancelAnimationFrame(animacion);
+        const inicio = { ...vista };
+        const t0 = performance.now();
+        const dur = 600;
+        const paso = (t) => {
+            const p = Math.min(1, (t - t0) / dur);
+            const e = 1 - Math.pow(1 - p, 3);
+            vista = {
+                k: inicio.k + (destino.k - inicio.k) * e,
+                x: inicio.x + (destino.x - inicio.x) * e,
+                y: inicio.y + (destino.y - inicio.y) * e,
+            };
+            pintar();
+            if (p < 1) animacion = requestAnimationFrame(paso);
+        };
+        animacion = requestAnimationFrame(paso);
+    };
+
+    const centrarEn = (px, py, k) => ({ k, x: W / 2 - px * k, y: H / 2 - py * k });
+
+    // Pasar coordenadas de pantalla a coordenadas del SVG
+    const aSvg = (clientX, clientY) => {
+        const r = svg.getBoundingClientRect();
+        return [(clientX - r.left) * (W / r.width), (clientY - r.top) * (H / r.height)];
+    };
+
+    // Rueda del mouse
+    svg.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        cancelAnimationFrame(animacion);
+        const [cx, cy] = aSvg(e.clientX, e.clientY);
+        zoomEn(Math.exp(-e.deltaY * 0.0015), cx, cy);
+    }, { passive: false });
+
+    // Doble clic = acercar
+    svg.addEventListener("dblclick", (e) => {
+        const [cx, cy] = aSvg(e.clientX, e.clientY);
+        const k = Math.min(ZOOM_MAX, vista.k * 2);
+        const f = k / vista.k;
+        animarA({ k, x: cx - (cx - vista.x) * f, y: cy - (cy - vista.y) * f });
+    });
+
+    // Arrastrar y pellizcar (mouse y touch)
+    const punteros = new Map();
+    let pellizcoPrevio = null;
+
+    svg.addEventListener("pointerdown", (e) => {
+        cancelAnimationFrame(animacion);
+        svg.setPointerCapture(e.pointerId);
+        punteros.set(e.pointerId, aSvg(e.clientX, e.clientY));
+        svg.classList.add("arrastrando");
+        pellizcoPrevio = null;
+    });
+
+    svg.addEventListener("pointermove", (e) => {
+        if (!punteros.has(e.pointerId)) return;
+        const ahora = aSvg(e.clientX, e.clientY);
+        const antes = punteros.get(e.pointerId);
+        punteros.set(e.pointerId, ahora);
+
+        if (punteros.size === 1) {
+            vista = limitar({ k: vista.k, x: vista.x + ahora[0] - antes[0], y: vista.y + ahora[1] - antes[1] });
+            pintar();
+        } else if (punteros.size === 2) {
+            const [a, b] = [...punteros.values()];
+            const dist = Math.hypot(a[0] - b[0], a[1] - b[1]);
+            const centro = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+            if (pellizcoPrevio) {
+                vista.x += centro[0] - pellizcoPrevio.centro[0];
+                vista.y += centro[1] - pellizcoPrevio.centro[1];
+                zoomEn(dist / pellizcoPrevio.dist, centro[0], centro[1]);
+            }
+            pellizcoPrevio = { dist, centro };
+        }
+    });
+
+    const soltar = (e) => {
+        punteros.delete(e.pointerId);
+        pellizcoPrevio = null;
+        if (punteros.size === 0) svg.classList.remove("arrastrando");
+    };
+    svg.addEventListener("pointerup", soltar);
+    svg.addEventListener("pointercancel", soltar);
+
+    // Nombre del estado al pasar el mouse
+    capaZoom.addEventListener("pointermove", (e) => {
+        const estado = e.target.closest(".mapa-estado");
+        if (!estado || punteros.size > 0) {
+            tooltip.classList.remove("visible");
+            return;
+        }
+        const r = figura.getBoundingClientRect();
+        tooltip.textContent = estado.dataset.nombre;
+        tooltip.style.left = e.clientX - r.left + "px";
+        tooltip.style.top = e.clientY - r.top + "px";
+        tooltip.classList.add("visible");
+    });
+    svg.addEventListener("pointerleave", () => tooltip.classList.remove("visible"));
+
+    // Botones
+    figura.querySelectorAll(".mapa-controles button").forEach((boton) => {
+        boton.addEventListener("click", () => {
+            const accion = boton.dataset.zoom;
+            const c = [(W / 2 - vista.x) / vista.k, (H / 2 - vista.y) / vista.k]; // centro visible
+            if (accion === "in") animarA(centrarEn(c[0], c[1], vista.k * 1.8));
+            if (accion === "out") animarA(centrarEn(c[0], c[1], vista.k / 1.8));
+            if (accion === "morelia") animarA(centrarEn(moreliaX, moreliaY, 6));
+            if (accion === "reset") animarA({ k: 1, x: 0, y: 0 });
+        });
+    });
+
+    pintar();
+})();

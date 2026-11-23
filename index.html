@@ -17,6 +17,7 @@
 
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#sobre-mi">Sobre mí</a></li>
                 <li><a href="#habilidades">Habilidades</a></li>
                 <li><a href="#datos-curiosos">Datos curiosos</a></li>
                 <li><a href="#proyectos">Proyectos</a></li>
@@ -30,9 +31,9 @@
         <section id="inicio" class="inicio">
             <div class="inicio-contenido">
                 <div class="inicio-texto">
-                    <p class="saludo">Hola, soy</p>
+                    <p class="saludo">Hola, mi nombre es:</p>
                     <h1 class="split-flap">REGINA</h1>
-                    <h2>Estudiante de la uvaq</h2>
+                    <h2>Chava fresca</h2>
                     <p>
                         morelia
                     </p>
@@ -40,15 +41,39 @@
                     <a href="#proyectos" class="boton">Ver proyectos</a>
                 </div>
 
-                <!-- Apartado para escribir cosas sobre mí -->
-                <aside class="inicio-notas">
-                    <h3>Sobre mí</h3>
-                    <p>
-                        actualmete soy estudiante de la carrera de ingenieria en sistemas en la uvaq. Tengo 20 años y no trabajo, contrátame ya, necesito trabajo xfa. 
-                        Actualmente ocupo diferentes cargos dentro de la universidad, como por ejemplo tesorera de la rama estudiantil de mi carrera, secretaria de un grupo 
-                        universitario COPAREMX y presidenta de la rama de afinidad WIE. Y ya no se que mas poner aquí lol
-                    </p>
-                </aside>
+                <!-- Mapa interactivo de México: rueda del mouse / pellizco para zoom, arrastrar para mover -->
+                <figure class="mapa" id="mapa">
+                    <svg class="mapa-svg" role="img" aria-label="Mapa de México con un punto en Morelia, Michoacán">
+                        <g class="mapa-zoom"></g>
+                        <g class="mapa-punto">
+                            <circle class="mapa-pulso" r="9"></circle>
+                            <circle class="mapa-pulso mapa-pulso-2" r="9"></circle>
+                            <circle class="mapa-centro" r="9"></circle>
+                            <text class="mapa-etiqueta" x="20" y="9">Morelia</text>
+                        </g>
+                    </svg>
+                    <div class="mapa-controles">
+                        <button type="button" data-zoom="in" aria-label="Acercar">+</button>
+                        <button type="button" data-zoom="out" aria-label="Alejar">−</button>
+                        <button type="button" data-zoom="morelia" aria-label="Ir a Morelia">◎</button>
+                        <button type="button" data-zoom="reset" aria-label="Ver todo México">⟲</button>
+                    </div>
+                    <div class="mapa-tooltip" aria-hidden="true"></div>
+                    <figcaption>📍 Estoy en Morelia, Michoacán</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="sobre-mi" class="seccion">
+            <h2>Sobre mí</h2>
+
+            <!-- Apartado para escribir cosas sobre mí -->
+            <div class="sobre-mi">
+                <p>
+                    actualmete soy estudiante de la carrera de ingenieria en sistemas en la uvaq. Tengo 20 años y no trabajo, contrátame ya, necesito trabajo xfa.
+                    Actualmente ocupo diferentes cargos dentro de la universidad, como por ejemplo tesorera de la rama estudiantil de mi carrera, secretaria de un grupo
+                    universitario COPAREMX y presidenta de la rama de afinidad WIE. Y ya no se que mas poner aquí lol
+                </p>
             </div>
         </section>
 
@@ -129,13 +154,13 @@
 
                 <article class="dato">
                     <figure class="dato-imagen">
-                        <img src="img/datos-curiosos/dramas.jpg" alt="series">
+                        <img src="img/datos-curiosos/foto.jpg" alt="viajes">
                         <!-- si subo una imagen png, cambiar el .jpg por .png -->
                     </figure>
                     <div class="dato-texto">
                         <h3>Dato curioso #1</h3>
                         <p>
-                            Últimamente me han gustado mucho las series coreanas, me gusta lo dramáticas que son
+                            Me gusta viajar, quiero recorrer el mundo y concer muchos lugares nuevos
                         </p>
                     </div>
                 </article>
@@ -204,12 +229,31 @@
 
                 <article class="proyecto">
                     <figure class="proyecto-imagen">
-                        <img src="img/proyectos/proyecto-2.jpg" alt="Captura del proyecto 2">
+                        <img src="img/proyectos/reproductorMusica.png" alt="Reproductor de música">
                     </figure>
                     <div class="proyecto-cuerpo">
-                        <h3>Proyecto 2</h3>
+                        <h3>Reproductor de Música</h3>
                         <p>
-                            descripción del proyecto 2.
+                            Reproductor de música web donde los usuarios se registran, inician sesión y escuchan canciones, y la app recuerda la última que escucharon. 
+                            Está hecho con Next.js y React, usa PostgreSQL como base de datos y bcryptjs para cifrar las contraseñas.
+                        </p>
+                        <div class="proyecto-enlaces">
+                            <a href="#" target="_blank" rel="noopener noreferrer">Ver aquí</a>
+                            <a href="https://github.com/regitoro/Reproductor-de-Musica" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="proyecto">
+                    <figure class="proyecto-imagen">
+                        <img src="img/proyectos/backrooms2.png" alt="Captura del proyecto 3">
+                    </figure>
+                    <div class="proyecto-cuerpo">
+                        <h3>Decision game</h3>
+                        <p>
+                            Es un juego de aventura narrativa y terror ambientado en los Backrooms, donde el jugador toma decisiones que afectan el desarrollo de la historia y sus diferentes finales. 
+                            Cuenta con un sistema de cordura, escenas ilustradas, diálogos con efecto de máquina de escribir, música y efectos de sonido. 
+                            Está desarrollado en Java puro con Swing/AWT, utilizando javax.sound.sampled para el audio, ImageIO para las imágenes y archivos JSON para almacenar la historia.
                         </p>
                         <div class="proyecto-enlaces">
                             <a href="#" target="_blank" rel="noopener noreferrer">Ver aquí</a>
@@ -220,12 +264,28 @@
 
                 <article class="proyecto">
                     <figure class="proyecto-imagen">
-                        <img src="img/proyectos/proyecto-3.jpg" alt="Captura del proyecto 3">
+                        <img src="img/proyectos/foto.png" alt="Captura del proyecto 3">
                     </figure>
                     <div class="proyecto-cuerpo">
-                        <h3>Proyecto 3</h3>
+                        <h3>proyecto</h3>
                         <p>
-                            descripción del proyecto 3.
+                            descripcion
+                        </p>
+                        <div class="proyecto-enlaces">
+                            <a href="#" target="_blank" rel="noopener noreferrer">Ver aquí</a>
+                            <a href="#" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="proyecto">
+                    <figure class="proyecto-imagen">
+                        <img src="img/proyectos/foto.png" alt="Captura del proyecto 3">
+                    </figure>
+                    <div class="proyecto-cuerpo">
+                        <h3>proyecto</h3>
+                        <p>
+                            descripcion
                         </p>
                         <div class="proyecto-enlaces">
                             <a href="#" target="_blank" rel="noopener noreferrer">Ver aquí</a>
@@ -254,6 +314,7 @@
         <p>© 2026 Tu Nombre - Mi Portafolio</p>
     </footer>
 
+    <script src="mapa-mexico.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
