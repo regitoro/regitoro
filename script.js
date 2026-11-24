@@ -1275,18 +1275,30 @@ window.addEventListener("load", init);
 
 
 // ---------- Barras de porcentaje (habilidades e idiomas) ----------
-// Lee data-nivel de cada .nivel, escribe el porcentaje y llena la barra
-// cuando la sección aparece en pantalla.
+// Lee data-nivel de cada .nivel y llena la barra cuando aparece en pantalla.
+// El número no se muestra: solo el relleno representa el nivel.
 const niveles = document.querySelectorAll(".nivel");
 
 niveles.forEach((nivel) => {
     const valor = Math.max(0, Math.min(100, Number(nivel.dataset.nivel) || 0));
-    nivel.dataset.nivel = valor;
-    nivel.querySelector(".nivel-porcentaje").textContent = valor + "%";
+    const nombre = nivel.querySelector(".nivel-nombre")?.textContent.trim() || "";
+
+    // Dos capas iguales: base (texto claro) y relleno (fondo claro, texto oscuro)
+    const contenido = nivel.innerHTML;
+    nivel.innerHTML =
+        `<div class="nivel-capa nivel-base">${contenido}</div>` +
+        `<div class="nivel-capa nivel-relleno" aria-hidden="true">${contenido}</div>`;
+
+    nivel.style.setProperty("--nivel", valor);
+    nivel.setAttribute("role", "meter");
+    nivel.setAttribute("aria-valuemin", "0");
+    nivel.setAttribute("aria-valuemax", "100");
+    nivel.setAttribute("aria-valuenow", valor);
+    nivel.setAttribute("aria-label", nombre);
 });
 
 function llenarBarra(nivel) {
-    nivel.querySelector(".nivel-relleno").style.width = nivel.dataset.nivel + "%";
+    nivel.classList.add("lleno");
 }
 
 if ("IntersectionObserver" in window) {
@@ -1488,4 +1500,88 @@ document.querySelectorAll(".dato-imagen img, .proyecto-imagen img").forEach((img
     });
 
     pintar();
+})();
+
+/* ---------- Álbum de fotos apiladas (Sobre mí) ---------- */
+(() => {
+    const album = document.querySelector(".album");
+    if (!album) return;
+
+    const fotos = [...album.querySelectorAll(".album-foto")];
+    const contador = album.querySelector(".album-contador");
+    const n = fotos.length;
+    let actual = 0;
+    let animando = false;
+
+    // Cómo se ve cada lugar de la pila (0 = la de enfrente)
+    const lugares = [
+        "rotate(-2deg)",
+        "translate(14px, -10px) rotate(5deg) scale(0.97)",
+        "translate(-16px, -16px) rotate(-8deg) scale(0.94)",
+        "translate(10px, -22px) rotate(10deg) scale(0.91)",
+    ];
+    const lugar = (p) => lugares[Math.min(p, lugares.length - 1)];
+
+    // Si una imagen no existe, se muestra un recuadro de color
+    fotos.forEach((f) => {
+        const img = f.querySelector("img");
+        const marcar = () => f.classList.add("sin-foto");
+        img.addEventListener("error", marcar);
+        if (img.complete && img.naturalWidth === 0) marcar();
+    });
+
+    function acomodar() {
+        fotos.forEach((f, i) => {
+            const p = (i - actual + n) % n;
+            f.style.setProperty("--t", lugar(p));
+            f.style.zIndex = n - p;
+            f.setAttribute("aria-hidden", p !== 0);
+        });
+        contador.textContent = `${actual + 1} / ${n}`;
+    }
+
+    function mover(dir) {
+        if (animando || n < 2) return;
+        animando = true;
+
+        // siguiente: la de enfrente se va al fondo | anterior: la del fondo pasa al frente
+        const foto = dir > 0 ? fotos[actual] : fotos[(actual - 1 + n) % n];
+        const clase = dir > 0 ? "al-fondo" : "al-frente";
+        foto.style.setProperty("--t-desde", foto.style.getPropertyValue("--t"));
+
+        actual = (actual + dir + n) % n;
+        acomodar();
+
+        foto.classList.add(clase);
+        const terminar = () => {
+            foto.classList.remove(clase);
+            animando = false;
+        };
+        foto.addEventListener("animationend", terminar, { once: true });
+        // por si las animaciones están desactivadas
+        if (getComputedStyle(foto).animationName === "none") terminar();
+    }
+
+    album.querySelectorAll(".album-flecha").forEach((b) =>
+        b.addEventListener("click", () => mover(Number(b.dataset.dir)))
+    );
+
+    // Flechas del teclado cuando el foco está en el álbum
+    album.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") mover(1);
+        if (e.key === "ArrowLeft") mover(-1);
+    });
+
+    // Deslizar con el dedo en celular
+    let inicioX = null;
+    const pila = album.querySelector(".album-pila");
+    pila.addEventListener("touchstart", (e) => (inicioX = e.touches[0].clientX), { passive: true });
+    pila.addEventListener("touchend", (e) => {
+        if (inicioX === null) return;
+        const dx = e.changedTouches[0].clientX - inicioX;
+        if (Math.abs(dx) > 40) mover(dx < 0 ? 1 : -1);
+        inicioX = null;
+    });
+
+    acomodar();
 })();

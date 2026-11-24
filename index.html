@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Portafolio</title>
+    <title>Regi's Portfolio</title>
+    <!-- Íconos de tecnologías (Java, HTML, Git, etc.): https://devicon.dev -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <!-- Fuente compacta para las barras de habilidades -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,7 +19,7 @@
 
     <header>
         <nav>
-            <h2>Mi Portafolio</h2>
+            <h2>Regi's Portfolio</h2>
 
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
@@ -33,9 +39,9 @@
                 <div class="inicio-texto">
                     <p class="saludo">Hola, mi nombre es:</p>
                     <h1 class="split-flap">REGINA</h1>
-                    <h2>Chava fresca</h2>
+                    <h2>Estudiante de Ingeniería en Sistemas</h2>
                     <p>
-                        morelia
+                        UVAQ
                     </p>
 
                     <a href="#proyectos" class="boton">Ver proyectos</a>
@@ -70,10 +76,31 @@
             <!-- Apartado para escribir cosas sobre mí -->
             <div class="sobre-mi">
                 <p>
-                    actualmete soy estudiante de la carrera de ingenieria en sistemas en la uvaq. Tengo 20 años y no trabajo, contrátame ya, necesito trabajo xfa.
-                    Actualmente ocupo diferentes cargos dentro de la universidad, como por ejemplo tesorera de la rama estudiantil de mi carrera, secretaria de un grupo
-                    universitario COPAREMX y presidenta de la rama de afinidad WIE. Y ya no se que mas poner aquí lol
+                    Actualmente soy estudiante de Ingeniería en Sistemas en la Universidad Vasco de Quiroga (UVAQ). 
+                    Tengo 20 años y me encuentro en búsqueda de una oportunidad laboral que me permita adquirir experiencia profesional, desarrollar mis habilidades y poner en práctica los conocimientos que he adquirido durante mi formación académica.
+
+                    Dentro de la universidad participo activamente en diferentes organizaciones estudiantiles, desempeñando cargos como tesorera de la Rama Estudiantil de Ingeniería en Sistemas, secretaria de COPAREMX y presidenta de la rama de afinidad Women in Engineering (WIE).
+
+                    Estas experiencias me han permitido desarrollar habilidades de liderazgo, comunicación, organización, administración de recursos, trabajo en equipo y resolución de problemas. Me considero una persona proactiva, responsable, comprometida y con muchas ganas de aprender, asumir nuevos retos y aportar valor al equipo de trabajo.
                 </p>
+
+                <!-- Álbum de fotos: agrega o quita <figure> (de 5 a 8 se ve bien).
+                     Pon tus fotos en img/sobre-mi/ y cambia el src y el texto. -->
+                <div class="album" aria-roledescription="carrusel" aria-label="Álbum de fotos">
+                    <div class="album-pila">
+                        <figure class="album-foto"><img src="img/sobre-mi/foto1.jpg" alt="Foto 1"><figcaption>Foto 1</figcaption></figure>
+                        <figure class="album-foto"><img src="img/sobre-mi/foto2.jpg" alt="Foto 2"><figcaption>Foto 2</figcaption></figure>
+                        <figure class="album-foto"><img src="img/sobre-mi/foto3.jpg" alt="Foto 3"><figcaption>Foto 3</figcaption></figure>
+                        <figure class="album-foto"><img src="img/sobre-mi/foto4.jpg" alt="Foto 4"><figcaption>Foto 4</figcaption></figure>
+                        <figure class="album-foto"><img src="img/sobre-mi/foto5.jpg" alt="Foto 5"><figcaption>Foto 5</figcaption></figure>
+                        <figure class="album-foto"><img src="img/sobre-mi/foto6.jpg" alt="Foto 6"><figcaption>Foto 6</figcaption></figure>
+                    </div>
+                    <div class="album-controles">
+                        <button type="button" class="album-flecha" data-dir="-1" aria-label="Foto anterior">&#8249;</button>
+                        <span class="album-contador" aria-live="polite">1 / 6</span>
+                        <button type="button" class="album-flecha" data-dir="1" aria-label="Foto siguiente">&#8250;</button>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -85,58 +112,144 @@
             </p>
 
             <!--
-                Para cambiar un porcentaje, edita solo el número de data-nivel (0 a 100).
-                El texto del porcentaje y el largo de la barra se actualizan solos.
+                Para cambiar un nivel, edita solo el número de data-nivel (0 a 100).
+                El relleno de la barra se actualiza solo (el número no se muestra).
+                Íconos: busca el nombre en https://devicon.dev (ej. devicon-python-plain).
             -->
-            <div class="niveles">
 
+            <!-- 1. Habilidades blandas -->
+            <div class="grupo-habilidades">
+                <h3 class="grupo-titulo">Habilidades blandas</h3>
                 <article class="tarjeta-niveles">
-                    <h3>Habilidades técnicas</h3>
-                    <ul class="lista-niveles">
-                        <li class="nivel" data-nivel="70">
-                            <span class="nivel-nombre">Java</span>
-                            <span class="nivel-porcentaje"></span>
-                            <div class="nivel-barra"><div class="nivel-relleno"></div></div>
+                    <ul class="lista-niveles lista-dos-columnas">
+                        <li class="nivel" data-nivel="85">
+                            <span class="nivel-nombre">Comunicación efectiva</span>
                         </li>
-                        <li class="nivel" data-nivel="40">
-                            <span class="nivel-nombre">HTML</span>
-                            <span class="nivel-porcentaje"></span>
-                            <div class="nivel-barra"><div class="nivel-relleno"></div></div>
+                        <li class="nivel" data-nivel="90">
+                            <span class="nivel-nombre">Trabajo en equipo</span>
                         </li>
-                        <li class="nivel" data-nivel="60">
-                            <span class="nivel-nombre">Git</span>
-                            <span class="nivel-porcentaje"></span>
-                            <div class="nivel-barra"><div class="nivel-relleno"></div></div>
+                        <li class="nivel" data-nivel="85">
+                            <span class="nivel-nombre">Liderazgo</span>
                         </li>
-                        <li class="nivel" data-nivel="50">
-                            <span class="nivel-nombre">SQL</span>
-                            <span class="nivel-porcentaje"></span>
-                            <div class="nivel-barra"><div class="nivel-relleno"></div></div>
+                        <li class="nivel" data-nivel="80">
+                            <span class="nivel-nombre">Resolución de problemas</span>
+                        </li>
+                        <li class="nivel" data-nivel="80">
+                            <span class="nivel-nombre">Adaptabilidad</span>
+                        </li>
+                        <li class="nivel" data-nivel="85">
+                            <span class="nivel-nombre">Organización y gestión del tiempo</span>
+                        </li>
+                        <li class="nivel" data-nivel="75">
+                            <span class="nivel-nombre">Pensamiento crítico</span>
+                        </li>
+                        <li class="nivel" data-nivel="80">
+                            <span class="nivel-nombre">Creatividad</span>
                         </li>
                     </ul>
                 </article>
+            </div>
 
+            <!-- 2. Habilidades técnicas: una tarjeta por categoría -->
+            <div class="grupo-habilidades">
+                <h3 class="grupo-titulo">Habilidades técnicas</h3>
+                <div class="niveles">
                 <article class="tarjeta-niveles">
-                    <h3>Idiomas</h3>
+                    <h4>Programación</h4>
                     <ul class="lista-niveles">
+                        <li class="nivel" data-nivel="60">
+                            <span class="nivel-icono"><i class="devicon-java-plain"></i></span>
+                            <span class="nivel-nombre">Java</span>
+                        </li>
+                        <li class="nivel" data-nivel="45">
+                            <span class="nivel-icono"><i class="devicon-python-plain"></i></span>
+                            <span class="nivel-nombre">Python</span>
+                        </li>
+                        <li class="nivel" data-nivel="40">
+                            <span class="nivel-icono"><i class="devicon-javascript-plain"></i></span>
+                            <span class="nivel-nombre">JavaScript</span>
+                        </li>
+                    </ul>
+                </article>
+                <article class="tarjeta-niveles">
+                    <h4>Desarrollo web</h4>
+                    <ul class="lista-niveles">
+                        <li class="nivel" data-nivel="50">
+                            <span class="nivel-icono"><i class="devicon-html5-plain"></i></span>
+                            <span class="nivel-nombre">HTML</span>
+                        </li>
+                        <li class="nivel" data-nivel="45">
+                            <span class="nivel-icono"><i class="devicon-css3-plain"></i></span>
+                            <span class="nivel-nombre">CSS</span>
+                        </li>
+                    </ul>
+                </article>
+                <article class="tarjeta-niveles">
+                    <h4>Bases de datos</h4>
+                    <ul class="lista-niveles">
+                        <li class="nivel" data-nivel="40">
+                            <span class="nivel-icono"><i class="devicon-mysql-plain"></i></span>
+                            <span class="nivel-nombre">MySQL</span>
+                        </li>
+                        <li class="nivel" data-nivel="30">
+                            <span class="nivel-icono"><i class="devicon-postgresql-plain"></i></span>
+                            <span class="nivel-nombre">PostgreSQL</span>
+                        </li>
+                    </ul>
+                </article>
+                <article class="tarjeta-niveles">
+                    <h4>Herramientas</h4>
+                    <ul class="lista-niveles">
+                        <li class="nivel" data-nivel="55">
+                            <span class="nivel-icono"><i class="devicon-git-plain"></i></span>
+                            <span class="nivel-nombre">Git</span>
+                        </li>
+                        <li class="nivel" data-nivel="60">
+                            <span class="nivel-icono"><i class="devicon-github-original"></i></span>
+                            <span class="nivel-nombre">GitHub</span>
+                        </li>
+                        <li class="nivel" data-nivel="55">
+                            <span class="nivel-icono"><i class="devicon-intellij-plain"></i></span>
+                            <span class="nivel-nombre">IntelliJ IDEA</span>
+                        </li>
+                        <li class="nivel" data-nivel="70">
+                            <span class="nivel-icono"><i class="devicon-vscode-plain"></i></span>
+                            <span class="nivel-nombre">Visual Studio Code</span>
+                        </li>
+                    </ul>
+                </article>
+                <article class="tarjeta-niveles">
+                    <h4>Sistemas operativos</h4>
+                    <ul class="lista-niveles">
+                        <li class="nivel" data-nivel="80">
+                            <span class="nivel-icono"><i class="devicon-windows8-original"></i></span>
+                            <span class="nivel-nombre">Windows</span>
+                        </li>
+                        <li class="nivel" data-nivel="40">
+                            <span class="nivel-icono"><i class="devicon-linux-plain"></i></span>
+                            <span class="nivel-nombre">Linux</span>
+                        </li>
+                    </ul>
+                </article>
+                </div>
+            </div>
+
+            <!-- 3. Idiomas -->
+            <div class="grupo-habilidades">
+                <h3 class="grupo-titulo">Idiomas</h3>
+                <article class="tarjeta-niveles">
+                    <ul class="lista-niveles lista-tres-columnas">
                         <li class="nivel" data-nivel="100">
                             <span class="nivel-nombre">Español</span>
-                            <span class="nivel-porcentaje"></span>
-                            <div class="nivel-barra"><div class="nivel-relleno"></div></div>
                         </li>
                         <li class="nivel" data-nivel="80">
                             <span class="nivel-nombre">Inglés</span>
-                            <span class="nivel-porcentaje"></span>
-                            <div class="nivel-barra"><div class="nivel-relleno"></div></div>
                         </li>
                         <li class="nivel" data-nivel="30">
                             <span class="nivel-nombre">Italiano</span>
-                            <span class="nivel-porcentaje"></span>
-                            <div class="nivel-barra"><div class="nivel-relleno"></div></div>
                         </li>
                     </ul>
                 </article>
-
             </div>
 
         </section>
@@ -154,7 +267,7 @@
 
                 <article class="dato">
                     <figure class="dato-imagen">
-                        <img src="img/datos-curiosos/foto.jpg" alt="viajes">
+                        <img src="img/datos-curiosos/newyork.jpeg" alt="viajes">
                         <!-- si subo una imagen png, cambiar el .jpg por .png -->
                     </figure>
                     <div class="dato-texto">
