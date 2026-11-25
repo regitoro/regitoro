@@ -96,9 +96,12 @@
                         <figure class="album-foto"><img src="img/sobre-mi/foto6.jpg" alt="Foto 6"><figcaption>Foto 6</figcaption></figure>
                     </div>
                     <div class="album-controles">
-                        <button type="button" class="album-flecha" data-dir="-1" aria-label="Foto anterior">&#8249;</button>
-                        <span class="album-contador" aria-live="polite">1 / 6</span>
-                        <button type="button" class="album-flecha" data-dir="1" aria-label="Foto siguiente">&#8250;</button>
+                        <button type="button" class="album-flecha" data-dir="-1" aria-label="Foto anterior">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+                        </button>
+                        <button type="button" class="album-flecha" data-dir="1" aria-label="Foto siguiente">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -393,19 +396,89 @@
 
                 <article class="proyecto">
                     <figure class="proyecto-imagen">
-                        <img src="img/proyectos/foto.png" alt="Captura del proyecto 3">
+                        <img src="img/proyectos/pingpong.png" alt="Ping Pong">
                     </figure>
                     <div class="proyecto-cuerpo">
-                        <h3>proyecto</h3>
+                        <h3>Ping Pong</h3>
                         <p>
-                            descripcion
+                            Juego de entrenamiento estilo pong para un solo jugador, hecho con HTML, CSS y JavaScript (Canvas). 
+                            El jugador controla una paleta del lado izquierdo y debe devolver la pelota, que rebota contra una pared en el lado derecho. 
+                            Cada golpe suma puntos, y conforme sube el puntaje el juego sube de nivel y se vuelve más rápido.
                         </p>
                         <div class="proyecto-enlaces">
-                            <a href="#" target="_blank" rel="noopener noreferrer">Ver aquí</a>
-                            <a href="#" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                            <a href="https://regitoro.github.io/Pin-Pong_VS_Pared/" target="_blank" rel="noopener noreferrer">Ver aquí</a>
+                            <a href="https://github.com/regitoro/Pin-Pong_VS_Pared/" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
                         </div>
                     </div>
                 </article>
+
+                <article class="proyecto">
+                    <figure class="proyecto-imagen">
+                        <img src="img/proyectos/cursos2.png" alt="Cursos Online">
+                    </figure>
+                    <div class="proyecto-cuerpo">
+                        <h3>Cursos Online</h3>
+                        <p>
+                            Learnex es una plataforma de cursos en línea desarrollada en PHP y MySQL con cuatro roles (administrador, director, ponente y alumno). P
+                            ermite crear cursos por bloques y lecciones con un editor de texto enriquecido, evaluar a los alumnos con ejercicios abiertos y de opción múltiple, revisar los cursos antes de publicarlos, seguir el progreso de cada alumno y emitir certificados automáticos. 
+                            Incluye autenticación segura, recuperación de contraseña por correo y despliegue en hosting web
+                        </p>
+                        <div class="proyecto-enlaces">
+                            <a href="https://learnex.freedev.app/login.php" target="_blank" rel="noopener noreferrer">Ver aquí</a>
+                            <a href="https://github.com/regitoro/ejemplos-php/tree/main/Cursos_Online" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="proyecto">
+                    <figure class="proyecto-imagen">
+                        <img src="img/proyectos/clima.png" alt="Clima api">
+                    </figure>
+                    <div class="proyecto-cuerpo">
+                        <h3>Clima api</h3>
+                        <p>
+                            Aplicación web para consultar el clima actual de ciudades de todo el mundo
+                        </p>
+                        <div class="proyecto-enlaces">
+                            <a href="https://clima-api-mxoe.onrender.com/" target="_blank" rel="noopener noreferrer">Ver aquí</a>
+                            <a href="https://github.com/regitoro/ia-clima" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="proyecto">
+                    <figure class="proyecto-imagen">
+                        <img src="img/proyectos/pokedex.png" alt="Pokédex">
+                    </figure>
+                    <div class="proyecto-cuerpo">
+                        <h3>Pokédex</h3>
+                        <p>
+                            Pokédex web hecha en PHP puro (sin frameworks ni base de datos) que consume la [PokeAPI](para mostrar los primeros **200 Pokémon**, con buscador, paginación, ficha de detalle y cadena de evoluciones.
+                        </p>
+                        <div class="proyecto-enlaces">
+                            <a href="https://pokedex-ldgr.onrender.com/" target="_blank" rel="noopener noreferrer">Ver aquí</a>
+                            <a href="https://github.com/regitoro/ejemplos-php/tree/main/pokemon" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="proyecto">
+                    <figure class="proyecto-imagen">
+                        <img src="img/proyectos/cotizador.png" alt="Cotizador Web">
+                    </figure>
+                    <div class="proyecto-cuerpo">
+                        <h3>Cotizador Web</h3>
+                        <p>
+                            Página web estática (HTML, CSS y JavaScript sin dependencias) que permite generar una cotización estimada para el desarrollo de un sitio web.
+                        </p>
+                        <div class="proyecto-enlaces">
+                            <a href="https://regitoro.github.io/cotizador-web/" target="_blank" rel="noopener noreferrer">Ver aquí</a>
+                            <a href="https://github.com/regitoro/cotizador-web" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                        </div>
+                    </div>
+                </article>
+
+                
 
             </div>
         </section>

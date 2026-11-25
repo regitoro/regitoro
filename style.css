@@ -278,14 +278,13 @@ nav a:hover::after {
 
 /* ---------- Sobre mí ---------- */
 
-.sobre-mi {
+/* El contorno solo rodea al texto; el álbum queda afuera */
+.sobre-mi p {
+    margin: 0;
     background-color: var(--superficie);
     border: 1px dashed var(--azul);
     border-radius: 14px;
     padding: 32px;
-}
-
-.sobre-mi p {
     color: var(--texto-suave);
     font-size: 1.05rem;
 }
@@ -294,7 +293,7 @@ nav a:hover::after {
 .sobre-mi:has(.album) {
     display: grid;
     grid-template-columns: 1fr 300px;
-    gap: 48px;
+    gap: 80px;
     align-items: center;
 }
 
@@ -378,37 +377,47 @@ nav a:hover::after {
 .album-controles {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 28px;
 }
 
+/* Flechas minimalistas: solo el trazo, sin círculo */
 .album-flecha {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid var(--azul);
-    background: var(--superficie);
-    color: var(--texto);
-    font-size: 1.8rem;
-    line-height: 1;
+    display: grid;
+    place-items: center;
+    padding: 4px;
+    border: none;
+    background: none;
+    color: var(--texto-suave);
     cursor: pointer;
-    transition: background 0.25s, transform 0.25s;
+    transition: color 0.25s, transform 0.25s;
+}
+
+.album-flecha svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .album-flecha:hover {
-    background: var(--azul);
-    transform: scale(1.08);
+    color: var(--cian);
+}
+
+.album-flecha[data-dir="-1"]:hover {
+    transform: translateX(-3px);
+}
+
+.album-flecha[data-dir="1"]:hover {
+    transform: translateX(3px);
 }
 
 .album-flecha:focus-visible {
-    outline: 2px solid var(--cian);
-    outline-offset: 3px;
-}
-
-.album-contador {
-    color: var(--texto-suave);
-    font-variant-numeric: tabular-nums;
-    min-width: 48px;
-    text-align: center;
+    outline: 1px solid var(--cian);
+    outline-offset: 2px;
+    border-radius: 4px;
 }
 
 .saludo {
@@ -936,7 +945,7 @@ footer {
     /* Álbum debajo del texto */
     .sobre-mi:has(.album) {
         grid-template-columns: 1fr;
-        gap: 36px;
+        gap: 48px;
     }
 
     .album-pila {

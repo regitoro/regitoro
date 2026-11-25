@@ -1508,7 +1508,6 @@ document.querySelectorAll(".dato-imagen img, .proyecto-imagen img").forEach((img
     if (!album) return;
 
     const fotos = [...album.querySelectorAll(".album-foto")];
-    const contador = album.querySelector(".album-contador");
     const n = fotos.length;
     let actual = 0;
     let animando = false;
@@ -1537,7 +1536,6 @@ document.querySelectorAll(".dato-imagen img, .proyecto-imagen img").forEach((img
             f.style.zIndex = n - p;
             f.setAttribute("aria-hidden", p !== 0);
         });
-        contador.textContent = `${actual + 1} / ${n}`;
     }
 
     function mover(dir) {
