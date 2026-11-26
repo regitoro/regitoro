@@ -64,90 +64,199 @@
         <section id="sobre-mi" class="seccion">
             <h2 class="titulo-animado">Sobre mí</h2>
 
-            <!-- Apartado para escribir cosas sobre mí -->
-            <div class="sobre-mi">
-                <div class="sobre-mi-columna">
-                <p>
-                    Actualmente soy estudiante de Ingeniería en Sistemas en la Universidad Vasco de Quiroga (UVAQ).
-                    Tengo 20 años y me encuentro en búsqueda de una oportunidad laboral que me permita adquirir experiencia profesional, desarrollar mis habilidades y poner en práctica los conocimientos que he adquirido durante mi formación académica.
+            <!-- Bento Grid: cada tarjeta es un <article class="bento-card b-...">.
+                 El acomodo (qué tarjeta va en qué lugar) está en style.css → .bento -->
+            <div class="bento">
 
-                    Dentro de la universidad participo activamente en diferentes organizaciones estudiantiles, desempeñando cargos como tesorera de la Rama Estudiantil de Ingeniería en Sistemas, secretaria de COPAREMX y presidenta de la rama de afinidad Women in Engineering (WIE).
-
-                    Estas experiencias me han permitido desarrollar habilidades de liderazgo, comunicación, organización, administración de recursos, trabajo en equipo y resolución de problemas. Me considero una persona proactiva, responsable, comprometida y con muchas ganas de aprender, asumir nuevos retos y aportar valor al equipo de trabajo.
-                </p>
-
-                <!-- Mapa interactivo de México: rueda del mouse / pellizco para zoom, arrastrar para mover -->
-                <figure class="mapa" id="mapa">
-                    <svg class="mapa-svg" role="img" aria-label="Mapa de México con un punto en Morelia, Michoacán">
-                        <g class="mapa-zoom"></g>
-                        <g class="mapa-punto">
-                            <circle class="mapa-pulso" r="9"></circle>
-                            <circle class="mapa-pulso mapa-pulso-2" r="9"></circle>
-                            <circle class="mapa-centro" r="9"></circle>
-                            <text class="mapa-etiqueta" x="20" y="9">Morelia</text>
-                        </g>
-                    </svg>
-                    <div class="mapa-controles">
-                        <button type="button" data-zoom="in" aria-label="Acercar">+</button>
-                        <button type="button" data-zoom="out" aria-label="Alejar">−</button>
-                        <button type="button" data-zoom="morelia" aria-label="Ir a Morelia">◎</button>
-                        <button type="button" data-zoom="reset" aria-label="Ver todo México">⟲</button>
+                <!-- 1. Presentación (tarjeta grande) -->
+                <article class="bento-card b-intro cat-prog">
+                    <div class="skill-arriba">
+                        <span class="skill-icono"><span class="skill-emoji">👋</span></span>
+                        <span class="skill-chip">Hola</span>
                     </div>
-                    <div class="mapa-tooltip" aria-hidden="true"></div>
-                    <figcaption>📍 Estoy en Morelia, Michoacán</figcaption>
-                </figure>
-                </div>
+                    <h3 class="bento-grande">Soy <span class="bento-degradado">Regina Toro</span></h3>
+                    <p class="bento-texto">
+                        Actualmente soy estudiante de <strong>Ingeniería en Sistemas</strong> en la
+                        <strong>Universidad Vasco de Quiroga (UVAQ)</strong>. Dentro de la universidad participo
+                        activamente en diferentes organizaciones estudiantiles.
+                    </p>
+                    <div class="bento-etiquetas">
+                        <span>💻 Sistemas</span>
+                        <span>🎓 UVAQ</span>
+                        <span>📍 Morelia</span>
+                    </div>
+                </article>
 
-                <!-- Álbum de fotos: agrega o quita <figure> (de 5 a 8 se ve bien).
+                <!-- 2. Álbum de fotos: agrega o quita <figure> (de 5 a 8 se ve bien).
                      Pon tus fotos en img/sobre-mi/ y cambia el src y el texto. -->
-                <div class="album" aria-roledescription="carrusel" aria-label="Álbum de fotos">
-                    <div class="album-pila">
-                        <figure class="album-foto"><img src="img/sobre-mi/foto1.jpg" alt="Foto 1"><figcaption>Foto 1</figcaption></figure>
-                        <figure class="album-foto"><img src="img/sobre-mi/foto2.jpg" alt="Foto 2"><figcaption>Foto 2</figcaption></figure>
-                        <figure class="album-foto"><img src="img/sobre-mi/foto3.jpg" alt="Foto 3"><figcaption>Foto 3</figcaption></figure>
-                        <figure class="album-foto"><img src="img/sobre-mi/ropec2026.jpeg" alt="Foto 4"><figcaption>Foto 4</figcaption></figure>
-                        <figure class="album-foto"><img src="img/sobre-mi/wie.jpeg" alt="Foto 5"><figcaption>Foto 5</figcaption></figure>
-                        <figure class="album-foto"><img src="img/sobre-mi/coparmex.jpeg" alt="Foto 6"><figcaption>Foto 6</figcaption></figure>
+                <article class="bento-card b-album cat-web">
+                    <div class="album" aria-roledescription="carrusel" aria-label="Álbum de fotos">
+                        <div class="album-pila">
+                            <figure class="album-foto"><img src="img/sobre-mi/foto1.jpg" alt="Foto 1"><figcaption>Foto 1</figcaption></figure>
+                            <figure class="album-foto"><img src="img/sobre-mi/foto2.jpg" alt="Foto 2"><figcaption>Foto 2</figcaption></figure>
+                            <figure class="album-foto"><img src="img/sobre-mi/foto3.jpg" alt="Foto 3"><figcaption>Foto 3</figcaption></figure>
+                            <figure class="album-foto"><img src="img/sobre-mi/ropec2026.jpeg" alt="Foto 4"><figcaption>Foto 4</figcaption></figure>
+                            <figure class="album-foto"><img src="img/sobre-mi/wie.jpeg" alt="Foto 5"><figcaption>Foto 5</figcaption></figure>
+                            <figure class="album-foto"><img src="img/sobre-mi/coparmex.jpeg" alt="Foto 6"><figcaption>Foto 6</figcaption></figure>
+                        </div>
+                        <div class="album-controles">
+                            <button type="button" class="album-flecha" data-dir="-1" aria-label="Foto anterior">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+                            </button>
+                            <button type="button" class="album-flecha" data-dir="1" aria-label="Foto siguiente">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+                            </button>
+                        </div>
                     </div>
-                    <div class="album-controles">
-                        <button type="button" class="album-flecha" data-dir="-1" aria-label="Foto anterior">
-                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
-                        </button>
-                        <button type="button" class="album-flecha" data-dir="1" aria-label="Foto siguiente">
-                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-                        </button>
+                </article>
+
+                <!-- 3. Dato rápido: edad -->
+                <article class="bento-card b-edad cat-tool">
+                    <div class="skill-arriba">
+                        <span class="skill-icono"><span class="skill-emoji">🎂</span></span>
+                        <span class="skill-chip">Edad</span>
                     </div>
-                </div>
-            </div>
+                    <p class="bento-numero">20</p>
+                    <p class="bento-pie">años</p>
+                </article>
 
-            <!-- Estudios: cambia el src de cada imagen (ponlas en img/sobre-mi/) y el texto -->
-            <div class="estudios">
-                <h3 class="estudios-titulo">Estudios</h3>
-                <div class="estudios-tarjetas">
-                    <article class="estudio">
-                        <div class="estudio-imagen">
-                            <img src="img/sobre-mi/universidad.png" alt="Universidad Vasco de Quiroga">
-                        </div>
-                        <div class="estudio-info">
-                            <span class="estudio-nivel">Universidad</span>
-                            <h4>Ingeniería en Sistemas</h4>
-                            <p class="estudio-lugar">Universidad Vasco de Quiroga (UVAQ)</p>
-                            <p class="estudio-fecha">2024 – Actualidad</p>
-                        </div>
-                    </article>
+                <!-- 4. Dato rápido: organizaciones -->
+                <article class="bento-card b-orgs cat-so">
+                    <div class="skill-arriba">
+                        <span class="skill-icono"><span class="skill-emoji">🏛️</span></span>
+                        <span class="skill-chip">Liderazgo</span>
+                    </div>
+                    <p class="bento-numero">3</p>
+                    <p class="bento-pie">organizaciones estudiantiles</p>
+                </article>
 
-                    <article class="estudio">
-                        <div class="estudio-imagen">
-                            <img src="img/sobre-mi/prepa.jpg" alt="Preparatoria">
+                <!-- 5. Mapa interactivo de México: rueda del mouse / pellizco para zoom, arrastrar para mover -->
+                <article class="bento-card b-mapa cat-db">
+                    <div class="skill-arriba">
+                        <span class="skill-icono"><span class="skill-emoji">📍</span></span>
+                        <span class="skill-chip">Morelia, Michoacán</span>
+                    </div>
+                    <figure class="mapa" id="mapa">
+                        <svg class="mapa-svg" role="img" aria-label="Mapa de México con un punto en Morelia, Michoacán">
+                            <g class="mapa-zoom"></g>
+                            <g class="mapa-punto">
+                                <circle class="mapa-pulso" r="9"></circle>
+                                <circle class="mapa-pulso mapa-pulso-2" r="9"></circle>
+                                <circle class="mapa-centro" r="9"></circle>
+                                <text class="mapa-etiqueta" x="20" y="9">Morelia</text>
+                            </g>
+                        </svg>
+                        <div class="mapa-controles">
+                            <button type="button" data-zoom="in" aria-label="Acercar">+</button>
+                            <button type="button" data-zoom="out" aria-label="Alejar">−</button>
+                            <button type="button" data-zoom="morelia" aria-label="Ir a Morelia">◎</button>
+                            <button type="button" data-zoom="reset" aria-label="Ver todo México">⟲</button>
                         </div>
-                        <div class="estudio-info">
-                            <span class="estudio-nivel">Preparatoria</span>
-                            <h4>Bachillerato</h4>
-                            <p class="estudio-lugar">UVAQ </p>
-                            <p class="estudio-fecha">2021 – 2024</p>
-                        </div>
-                    </article>
-                </div>
+                        <div class="mapa-tooltip" aria-hidden="true"></div>
+                    </figure>
+                </article>
+
+                <!-- 6. Qué estoy buscando -->
+                <article class="bento-card b-busco cat-blanda">
+                    <div class="skill-arriba">
+                        <span class="skill-icono"><span class="skill-emoji">🚀</span></span>
+                        <span class="skill-chip">Disponible</span>
+                    </div>
+                    <h4 class="skill-nombre">En búsqueda de una oportunidad laboral</h4>
+                    <p class="bento-texto">
+                        Que me permita adquirir experiencia profesional, desarrollar mis habilidades y poner en
+                        práctica los conocimientos que he adquirido durante mi formación académica.
+                    </p>
+                    <span class="bento-estado"><span class="bento-punto" aria-hidden="true"></span>Abierta a oportunidades</span>
+                </article>
+
+                <!-- 7, 8 y 9. Cargos en organizaciones estudiantiles -->
+                <article class="bento-card b-cargo1 cat-prog">
+                    <div class="skill-arriba">
+                        <span class="skill-icono"><span class="skill-emoji">💰</span></span>
+                        <span class="skill-chip">Rama ISC</span>
+                    </div>
+                    <h4 class="skill-nombre">Tesorera</h4>
+                    <p class="bento-pie">Rama Estudiantil de Ingeniería en Sistemas</p>
+                    <span class="bento-estado bento-cargo"><span class="bento-punto" aria-hidden="true"></span>Cargo actual</span>
+                </article>
+
+                <article class="bento-card b-cargo2 cat-web">
+                    <div class="skill-arriba">
+                        <span class="skill-icono"><span class="skill-emoji">📝</span></span>
+                        <span class="skill-chip">COPARMEX</span>
+                    </div>
+                    <h4 class="skill-nombre">Secretaria</h4>
+                    <p class="bento-pie">COPARMEX</p>
+                    <span class="bento-estado bento-cargo"><span class="bento-punto" aria-hidden="true"></span>Cargo actual</span>
+                </article>
+
+                <article class="bento-card b-cargo3 cat-tool">
+                    <div class="skill-arriba">
+                        <span class="skill-icono"><span class="skill-emoji">👩‍💻</span></span>
+                        <span class="skill-chip">WIE</span>
+                    </div>
+                    <h4 class="skill-nombre">Presidenta</h4>
+                    <p class="bento-pie">Rama de afinidad Women in Engineering</p>
+                    <span class="bento-estado bento-cargo"><span class="bento-punto" aria-hidden="true"></span>Cargo actual</span>
+                </article>
+
+                <!-- 10. Lo que he desarrollado gracias a esas experiencias -->
+                <article class="bento-card b-aprendi cat-so">
+                    <div class="skill-arriba">
+                        <span class="skill-icono"><span class="skill-emoji">🌱</span></span>
+                        <span class="skill-chip">Crecimiento</span>
+                    </div>
+                    <h4 class="skill-nombre">Estas experiencias me han permitido desarrollar</h4>
+                    <ul class="bento-chips">
+                        <li>Liderazgo</li>
+                        <li>Comunicación</li>
+                        <li>Organización</li>
+                        <li>Administración de recursos</li>
+                        <li>Trabajo en equipo</li>
+                        <li>Resolución de problemas</li>
+                    </ul>
+                </article>
+
+                <!-- 11. Cómo me considero -->
+                <article class="bento-card b-soy cat-blanda">
+                    <div class="skill-arriba">
+                        <span class="skill-icono"><span class="skill-emoji">✨</span></span>
+                        <span class="skill-chip">Me considero</span>
+                    </div>
+                    <ul class="bento-lista">
+                        <li>Proactiva</li>
+                        <li>Responsable</li>
+                        <li>Comprometida</li>
+                    </ul>
+                    <p class="bento-pie">Con muchas ganas de aprender, asumir nuevos retos y aportar valor al equipo de trabajo.</p>
+                </article>
+
+                <!-- 12 y 13. Estudios: cambia el src de cada imagen (ponlas en img/sobre-mi/) y el texto -->
+                <article class="bento-card b-uni estudio cat-prog">
+                    <div class="estudio-imagen">
+                        <img src="img/sobre-mi/universidad.png" alt="Universidad Vasco de Quiroga">
+                    </div>
+                    <div class="estudio-info">
+                        <span class="skill-chip">🎓 Universidad</span>
+                        <h4 class="skill-nombre">Ingeniería en Sistemas</h4>
+                        <p class="estudio-lugar">Universidad Vasco de Quiroga (UVAQ)</p>
+                        <p class="estudio-fecha">2024 – Actualidad</p>
+                    </div>
+                </article>
+
+                <article class="bento-card b-prepa estudio cat-web">
+                    <div class="estudio-imagen">
+                        <img src="img/sobre-mi/prepa.jpg" alt="Preparatoria">
+                    </div>
+                    <div class="estudio-info">
+                        <span class="skill-chip">📚 Preparatoria</span>
+                        <h4 class="skill-nombre">Bachillerato</h4>
+                        <p class="estudio-lugar">UVAQ</p>
+                        <p class="estudio-fecha">2021 – 2024</p>
+                    </div>
+                </article>
+
             </div>
         </section>
 
@@ -390,7 +499,7 @@
                         <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
                         <div class="skill-barra"><span></span></div>
                     </article>
-                    <article class="skill cat-idioma" data-nivel="20">
+                    <article class="skill cat-idioma" data-nivel="30">
                         <div class="skill-arriba">
                             <span class="skill-icono"><span class="skill-codigo">IT</span></span>
                             <span class="skill-chip">Básico</span>
@@ -407,51 +516,107 @@
             <h2 class="titulo-animado">Datos curiosos</h2>
 
             <!--
-                Cada .dato tiene una imagen y un párrafo. Se alternan solos:
-                el 1º lleva la imagen a la izquierda, el 2º a la derecha, y así.
-                Las imágenes van en la carpeta img/datos-curiosos/
+                Cada .dato es una tarjeta con una pila de fotos y su texto (se alternan de lado solos).
+                Las fotos van en img/datos-curiosos/. Para agregar una foto, copia un <figure class="pila-foto">.
                 Para agregar otro dato, copia un <article class="dato"> completo.
+                La pila de fotos (arrastrar / clic) la controla script.js → "Pila de fotos".
             -->
             <div class="datos">
 
-                <article class="dato">
-                    <figure class="dato-imagen">
-                        <img src="img/datos-curiosos/newyork.jpeg" alt="viajes">
-                        <!-- si subo una imagen png, cambiar el .jpg por .png -->
-                    </figure>
+                <article class="dato bento-card cat-web">
+                    <div class="dato-galeria">
+                        <div class="pila" tabindex="0" aria-roledescription="pila de fotos" aria-label="Fotos de viajes: arrastra la foto o haz clic para ver la siguiente">
+                            <figure class="pila-foto"><img src="img/datos-curiosos/newyork.jpeg" alt="Calle de Nueva York con el puente de Manhattan" draggable="false"></figure>
+                            
+                            <figure class="pila-foto"><img src="img/datos-curiosos/playa.jpeg" alt="Playa" draggable="false"></figure>
+                            <figure class="pila-foto"><img src="img/datos-curiosos/cubi2026.jpeg" alt="Cristo del Cubilete" draggable="false"></figure>
+                            
+                        </div>
+                        <div class="pila-pie">
+                            <span class="pila-contador">1 / 6</span>
+                        </div>
+                    </div>
                     <div class="dato-texto">
-                        <h3>Viajes</h3>
-                        <p>
-                            Me gusta viajar, quiero recorrer el mundo y concer muchos lugares nuevos
-                        </p>
+                        <span class="dato-num" aria-hidden="true">01</span>
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><span class="skill-emoji">✈️</span></span>
+                            <span class="skill-chip">6 fotos</span>
+                        </div>
+                        <h3 class="dato-titulo">Viajes</h3>
+                        <p>Me gusta viajar, quiero recorrer el mundo y conocer muchos lugares nuevos.</p>
+                        <ul class="bento-chips">
+                            <li>Nueva York</li>
+                            <li>Playa</li>
+                            <li>Guanajuato</li>
+                            <li>Monterrey</li>
+                        </ul>
                     </div>
                 </article>
 
-                <article class="dato">
-                    <figure class="dato-imagen">
-                        <img src="img/datos-curiosos/horses.jpeg" alt="yo y caballos lol">
-                    </figure>
+                <article class="dato bento-card cat-prog">
+                    <div class="dato-galeria">
+                        <div class="pila" tabindex="0" aria-roledescription="pila de fotos" aria-label="Fotos de deporte: arrastra la foto o haz clic para ver la siguiente">
+                            <figure class="pila-foto"><img src="img/datos-curiosos/horses.jpeg" alt="Saltando un obstáculo a caballo" draggable="false"></figure>
+                            <figure class="pila-foto"><img src="img/datos-curiosos/horses2.jpeg" alt="Montando a caballo" draggable="false"></figure>
+                            <figure class="pila-foto"><img src="img/datos-curiosos/horses3.jpeg" alt="Caballo sacando la lengua" draggable="false"></figure>
+                            <figure class="pila-foto"><img src="img/datos-curiosos/burro.jpeg" alt="Burrito" draggable="false"></figure>
+                        </div>
+                        <div class="pila-pie">
+                            <span class="pila-contador">1 / 4</span>
+                        </div>
+                    </div>
                     <div class="dato-texto">
-                        <h3>Deporte</h3>
-                        <p>
-                            Practiqué equitación desde los 6 hasta aproximadamente los 16 años. Es mi deporte favorito, aunque ya no lo practico. :(( 
-                        </p>
+                        <span class="dato-num" aria-hidden="true">02</span>
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><span class="skill-emoji">🐎</span></span>
+                            <span class="skill-chip">4 fotos</span>
+                        </div>
+                        <h3 class="dato-titulo">Deporte</h3>
+                        <p>Practiqué equitación desde los 6 hasta aproximadamente los 16 años. Es mi deporte favorito, aunque ya no lo practico. :((</p>
+                        <ul class="bento-chips">
+                            <li>Equitación</li>
+                            <li>Salto</li>
+                            <li>10 años montando</li>
+                        </ul>
                     </div>
                 </article>
 
-                <article class="dato">
-                    <figure class="dato-imagen">
-                        <img src="img/datos-curiosos/tigrees.JPG" alt="foto">
-                    </figure>
+                <article class="dato bento-card cat-tool">
+                    <div class="dato-galeria">
+                        <div class="pila" tabindex="0" aria-roledescription="pila de fotos" aria-label="Fotos de fotografía: arrastra la foto o haz clic para ver la siguiente">
+                            <figure class="pila-foto"><img src="img/datos-curiosos/tigrees.JPG" alt="Tigres descansando en el pasto" draggable="false"></figure>
+                            <figure class="pila-foto"><img src="img/datos-curiosos/ny.jpeg" alt="Estatua de la Libertad" draggable="false"></figure>
+                            <figure class="pila-foto"><img src="img/datos-curiosos/ny2.jpeg" alt="Edificio New Yorker en Nueva York" draggable="false"></figure>
+                            <figure class="pila-foto"><img src="img/datos-curiosos/fundidora.jpeg" alt="Parque Fundidora" draggable="false"></figure>
+                            <figure class="pila-foto"><img src="img/datos-curiosos/atardecer.jpeg" alt="Atardecer" draggable="false"></figure>
+                            <figure class="pila-foto"><img src="img/datos-curiosos/vaca.jpeg" alt="Vaca en el campo" draggable="false"></figure>
+                            <figure class="pila-foto"><img src="img/datos-curiosos/pato.jpeg" alt="Patos en el pasto" draggable="false"></figure>
+                            <figure class="pila-foto"><img src="img/datos-curiosos/gato2.jpeg" alt="Gato mirando a la cámara" draggable="false"></figure>
+                            <figure class="pila-foto"><img src="img/datos-curiosos/gato3.jpeg" alt="Gata tricolor" draggable="false"></figure>
+                            <!-- <figure class="pila-foto"><img src="img/datos-curiosos/perrita.jpeg" alt="Perrita" draggable="false"></figure> -->
+                            <!-- <figure class="pila-foto"><img src="img/datos-curiosos/zukecito.jpeg" alt="Zukecito, cachorro" draggable="false"></figure> -->
+                            <!-- <figure class="pila-foto"><img src="img/datos-curiosos/gato.jpeg" alt="Gato de cerca" draggable="false"></figure> -->
+                        </div>
+                        <div class="pila-pie">
+                            <span class="pila-contador">1 / 9</span>
+                        </div>
+                    </div>
                     <div class="dato-texto">
-                        <h3>Fotografía</h3>
-                        <p>
-                           Me gusta capturar momentos y lugares
-                        </p>
+                        <span class="dato-num" aria-hidden="true">03</span>
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><span class="skill-emoji">📷</span></span>
+                            <span class="skill-chip">9 fotos</span>
+                        </div>
+                        <h3 class="dato-titulo">Fotografía</h3>
+                        <p>Me gusta capturar momentos y lugares.</p>
+                        <ul class="bento-chips">
+                            <li>Atardeceres</li>
+                            <li>Animales</li>
+                            <li>Naturaleza</li>
+                        </ul>
                     </div>
                 </article>
 
-                
             </div>
         </section>
 
@@ -459,7 +624,9 @@
             <h2 class="titulo-animado">Mis proyectos</h2>
 
             <!--
-                Cada tarjeta: imagen arriba, título y descripción, y dos enlaces.
+                Cada tarjeta: imagen arriba, título, descripción, tecnologías (bento-chips) y enlaces.
+                Las tarjetas se acomodan solas en columnas del mismo ancho (script.js → "Proyectos: masonry"):
+                cada una mide lo que necesite su descripción y no quedan huecos.
                 - Imágenes: carpeta img/proyectos/ (proyecto-1.jpg, proyecto-2.jpg, ...)
                 - "Ver aquí": cambia el href="#" por el link de la página web del proyecto.
                 - "Ver repo de Git": cambia el href="#" por el link del repositorio,
@@ -468,163 +635,183 @@
             -->
             <div class="proyectos">
 
-                <article class="proyecto">
+                <article class="proyecto bento-card cat-prog">
                     <figure class="proyecto-imagen">
-                        <img src="img/proyectos/tamagotchi.png" alt="tamgochi">
+                        <img src="img/proyectos/tamagotchi.png" alt="Tamagotchi web">
+                        <span class="skill-chip proyecto-tipo">Juego</span>
                     </figure>
                     <div class="proyecto-cuerpo">
                         <h3>Tamagochi web</h3>
-                        <p>
-                            Este proyecto es un juego web de Tamagotchi hecho con Next.js. 
-                            El usuario crea a su mascota, la cuida durante un día virtual y debe mantener sus estadísticas de hambre, 
-                            diversión y limpieza en niveles aceptables para que no se enferme ni termine mal. 
-                            A lo largo del juego puede alimentar, jugar y bañar a la mascota, mientras aparecen eventos aleatorios 
-                            y la simulación avanza cada cierto tiempo hasta llegar al final del día.
-                        </p>
+                        <p>Este proyecto es un juego web de Tamagotchi hecho con Next.js. El usuario crea a su mascota, la cuida durante un día virtual y debe mantener sus estadísticas de hambre, diversión y limpieza en niveles aceptables para que no se enferme ni termine mal. A lo largo del juego puede alimentar, jugar y bañar a la mascota, mientras aparecen eventos aleatorios y la simulación avanza cada cierto tiempo hasta llegar al final del día.</p>
+                        <ul class="bento-chips">
+                            <li>Next.js</li>
+                            <li>React</li>
+                        </ul>
                         <div class="proyecto-enlaces">
                             <!-- <a href="#" target="_blank" rel="noopener noreferrer">Ver aquí</a> -->
                             <!-- cambiar el # por el link del proyecto -->
-                            <a href="https://github.com/regitoro/tamagotchi" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                            <a href="https://github.com/regitoro/tamagotchi" target="_blank" rel="noopener noreferrer">Ver repo de Git <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
                 </article>
 
-                <article class="proyecto">
+                <article class="proyecto bento-card cat-web">
                     <figure class="proyecto-imagen">
                         <img src="img/proyectos/reproductorMusica.png" alt="Reproductor de música">
+                        <span class="skill-chip proyecto-tipo">Web app</span>
                     </figure>
                     <div class="proyecto-cuerpo">
                         <h3>Reproductor de Música</h3>
-                        <p>
-                            Reproductor de música web donde los usuarios se registran, inician sesión y escuchan canciones, y la app recuerda la última que escucharon. 
-                            Está hecho con Next.js y React, usa PostgreSQL como base de datos y bcryptjs para cifrar las contraseñas.
-                        </p>
+                        <p>Reproductor de música web donde los usuarios se registran, inician sesión y escuchan canciones, y la app recuerda la última que escucharon. Está hecho con Next.js y React, usa PostgreSQL como base de datos y bcryptjs para cifrar las contraseñas.</p>
+                        <ul class="bento-chips">
+                            <li>Next.js</li>
+                            <li>React</li>
+                            <li>PostgreSQL</li>
+                            <li>bcryptjs</li>
+                        </ul>
                         <div class="proyecto-enlaces">
-                            <a href="https://regi-server.tail25aba8.ts.net/" target="_blank" rel="noopener noreferrer">Ver aquí</a>
-                            <a href="https://github.com/regitoro/Reproductor-de-Musica" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                            <a href="https://regi-server.tail25aba8.ts.net/" target="_blank" rel="noopener noreferrer">Ver aquí <span aria-hidden="true">↗</span></a>
+                            <a href="https://github.com/regitoro/Reproductor-de-Musica" target="_blank" rel="noopener noreferrer">Ver repo de Git <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
                 </article>
 
-                <article class="proyecto">
+                <article class="proyecto bento-card cat-db">
                     <figure class="proyecto-imagen">
-                        <img src="img/proyectos/backrooms2.png" alt="Captura del proyecto 3">
+                        <img src="img/proyectos/backroom.png" alt="Juego de decisiones en los Backrooms">
+                        <span class="skill-chip proyecto-tipo">Juego</span>
                     </figure>
                     <div class="proyecto-cuerpo">
                         <h3>Decision game</h3>
-                        <p>
-                            Es un juego de aventura narrativa y terror ambientado en los Backrooms, donde el jugador toma decisiones que afectan el desarrollo de la historia y sus diferentes finales. 
-                            Cuenta con un sistema de cordura, escenas ilustradas, diálogos con efecto de máquina de escribir, música y efectos de sonido. 
-                            Está desarrollado en Java puro con Swing/AWT, utilizando javax.sound.sampled para el audio, ImageIO para las imágenes y archivos JSON para almacenar la historia.
-                        </p>
+                        <p>Es un juego de aventura narrativa y terror ambientado en los Backrooms, donde el jugador toma decisiones que afectan el desarrollo de la historia y sus diferentes finales. Cuenta con un sistema de cordura, escenas ilustradas, diálogos con efecto de máquina de escribir, música y efectos de sonido. Está desarrollado en Java puro con Swing/AWT, utilizando javax.sound.sampled para el audio, ImageIO para las imágenes y archivos JSON para almacenar la historia.</p>
+                        <ul class="bento-chips">
+                            <li>Java</li>
+                            <li>Swing / AWT</li>
+                            <li>JSON</li>
+                        </ul>
                         <div class="proyecto-enlaces">
-                            <a href="https://youtu.be/ATUv9P8xVKA" target="_blank" rel="noopener noreferrer">YouTube</a>
-                            <a href="#" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                            <a href="https://youtu.be/ATUv9P8xVKA" target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer">Ver repo de Git <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
                 </article>
 
-                <article class="proyecto">
+                <article class="proyecto bento-card cat-tool">
                     <figure class="proyecto-imagen">
                         <img src="img/proyectos/multiplayer.png" alt="Juego 1 vs 1">
+                        <span class="skill-chip proyecto-tipo">Multijugador</span>
                     </figure>
                     <div class="proyecto-cuerpo">
                         <h3>Metal Night vs Kirby</h3>
-                        <p>
-                            Juego de pelea multijugador 1 vs 1 en tiempo real con personajes como Metal Night y Kirby,creado con Node.js, Express, Socket.IO y HTML5 Canvas, con servidor autoritativo.
-                        </p>
+                        <p>Juego de pelea multijugador 1 vs 1 en tiempo real con personajes como Metal Night y Kirby, creado con Node.js, Express, Socket.IO y HTML5 Canvas, con servidor autoritativo.</p>
+                        <ul class="bento-chips">
+                            <li>Node.js</li>
+                            <li>Express</li>
+                            <li>Socket.IO</li>
+                            <li>Canvas</li>
+                        </ul>
                         <div class="proyecto-enlaces">
-                            <a href="https://sprites-multiplayer.onrender.com/" target="_blank" rel="noopener noreferrer">Ver aquí</a>
-                            <a href="https://github.com/regitoro/sprites-multiplayer" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                            <a href="https://sprites-multiplayer.onrender.com/" target="_blank" rel="noopener noreferrer">Ver aquí <span aria-hidden="true">↗</span></a>
+                            <a href="https://github.com/regitoro/sprites-multiplayer" target="_blank" rel="noopener noreferrer">Ver repo de Git <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
                 </article>
 
-                <article class="proyecto">
+                <article class="proyecto bento-card cat-so">
                     <figure class="proyecto-imagen">
                         <img src="img/proyectos/pingpong.png" alt="Ping Pong">
+                        <span class="skill-chip proyecto-tipo">Juego</span>
                     </figure>
                     <div class="proyecto-cuerpo">
                         <h3>Ping Pong</h3>
-                        <p>
-                            Juego de entrenamiento estilo pong para un solo jugador, hecho con HTML, CSS y JavaScript (Canvas). 
-                            El jugador controla una paleta del lado izquierdo y debe devolver la pelota, que rebota contra una pared en el lado derecho. 
-                            Cada golpe suma puntos, y conforme sube el puntaje el juego sube de nivel y se vuelve más rápido.
-                        </p>
+                        <p>Juego de entrenamiento estilo pong para un solo jugador, hecho con HTML, CSS y JavaScript (Canvas). El jugador controla una paleta del lado izquierdo y debe devolver la pelota, que rebota contra una pared en el lado derecho. Cada golpe suma puntos, y conforme sube el puntaje el juego sube de nivel y se vuelve más rápido.</p>
+                        <ul class="bento-chips">
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                        </ul>
                         <div class="proyecto-enlaces">
-                            <a href="https://regitoro.github.io/Pin-Pong_VS_Pared/" target="_blank" rel="noopener noreferrer">Ver aquí</a>
-                            <a href="https://github.com/regitoro/Pin-Pong_VS_Pared/" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                            <a href="https://regitoro.github.io/Pin-Pong_VS_Pared/" target="_blank" rel="noopener noreferrer">Ver aquí <span aria-hidden="true">↗</span></a>
+                            <a href="https://github.com/regitoro/Pin-Pong_VS_Pared/" target="_blank" rel="noopener noreferrer">Ver repo de Git <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
                 </article>
 
-                <article class="proyecto">
+                <article class="proyecto bento-card cat-blanda">
                     <figure class="proyecto-imagen">
                         <img src="img/proyectos/cursos2.png" alt="Cursos Online">
+                        <span class="skill-chip proyecto-tipo">Plataforma</span>
                     </figure>
                     <div class="proyecto-cuerpo">
                         <h3>Cursos Online</h3>
-                        <p>
-                            Learnex es una plataforma de cursos en línea desarrollada en PHP y MySQL con cuatro roles (administrador, director, ponente y alumno). P
-                            ermite crear cursos por bloques y lecciones con un editor de texto enriquecido, evaluar a los alumnos con ejercicios abiertos y de opción múltiple, revisar los cursos antes de publicarlos, seguir el progreso de cada alumno y emitir certificados automáticos. 
-                            Incluye autenticación segura, recuperación de contraseña por correo y despliegue en hosting web
-                        </p>
+                        <p>Learnex es una plataforma de cursos en línea desarrollada en PHP y MySQL con cuatro roles (administrador, director, ponente y alumno). Permite crear cursos por bloques y lecciones con un editor de texto enriquecido, evaluar a los alumnos con ejercicios abiertos y de opción múltiple, revisar los cursos antes de publicarlos, seguir el progreso de cada alumno y emitir certificados automáticos. Incluye autenticación segura, recuperación de contraseña por correo y despliegue en hosting web.</p>
+                        <ul class="bento-chips">
+                            <li>PHP</li>
+                            <li>MySQL</li>
+                        </ul>
                         <div class="proyecto-enlaces">
-                            <a href="https://learnex.freedev.app/login.php" target="_blank" rel="noopener noreferrer">Ver aquí</a>
-                            <a href="https://github.com/regitoro/ejemplos-php/tree/main/Cursos_Online" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                            <a href="https://learnex.freedev.app/login.php" target="_blank" rel="noopener noreferrer">Ver aquí <span aria-hidden="true">↗</span></a>
+                            <a href="https://github.com/regitoro/ejemplos-php/tree/main/Cursos_Online" target="_blank" rel="noopener noreferrer">Ver repo de Git <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
                 </article>
 
-                <article class="proyecto">
+                <article class="proyecto bento-card cat-idioma">
                     <figure class="proyecto-imagen">
                         <img src="img/proyectos/clima.png" alt="Clima api">
+                        <span class="skill-chip proyecto-tipo">Web app</span>
                     </figure>
                     <div class="proyecto-cuerpo">
                         <h3>Clima api</h3>
-                        <p>
-                            Aplicación web para consultar el clima actual de ciudades de todo el mundo
-                        </p>
+                        <p>Aplicación web para consultar el clima actual de ciudades de todo el mundo.</p>
+                        <ul class="bento-chips">
+                            <li>API del clima</li>
+                        </ul>
                         <div class="proyecto-enlaces">
-                            <a href="https://clima-api-mxoe.onrender.com/" target="_blank" rel="noopener noreferrer">Ver aquí</a>
-                            <a href="https://github.com/regitoro/ia-clima" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                            <a href="https://clima-api-mxoe.onrender.com/" target="_blank" rel="noopener noreferrer">Ver aquí <span aria-hidden="true">↗</span></a>
+                            <a href="https://github.com/regitoro/ia-clima" target="_blank" rel="noopener noreferrer">Ver repo de Git <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
                 </article>
 
-                <article class="proyecto">
+                <article class="proyecto bento-card cat-prog">
                     <figure class="proyecto-imagen">
                         <img src="img/proyectos/pokedex.png" alt="Pokédex">
+                        <span class="skill-chip proyecto-tipo">Web app</span>
                     </figure>
                     <div class="proyecto-cuerpo">
                         <h3>Pokédex</h3>
-                        <p>
-                            Pokédex web hecha en PHP puro (sin frameworks ni base de datos) que consume la [PokeAPI](para mostrar los primeros **200 Pokémon**, con buscador, paginación, ficha de detalle y cadena de evoluciones.
-                        </p>
+                        <p>Pokédex web hecha en PHP puro (sin frameworks ni base de datos) que consume la PokeAPI para mostrar los primeros 200 Pokémon, con buscador, paginación, ficha de detalle y cadena de evoluciones.</p>
+                        <ul class="bento-chips">
+                            <li>PHP</li>
+                            <li>PokeAPI</li>
+                        </ul>
                         <div class="proyecto-enlaces">
-                            <a href="https://pokedex-ldgr.onrender.com/" target="_blank" rel="noopener noreferrer">Ver aquí</a>
-                            <a href="https://github.com/regitoro/ejemplos-php/tree/main/pokemon" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                            <a href="https://pokedex-ldgr.onrender.com/" target="_blank" rel="noopener noreferrer">Ver aquí <span aria-hidden="true">↗</span></a>
+                            <a href="https://github.com/regitoro/ejemplos-php/tree/main/pokemon" target="_blank" rel="noopener noreferrer">Ver repo de Git <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
                 </article>
 
-                <article class="proyecto">
+                <article class="proyecto bento-card cat-web">
                     <figure class="proyecto-imagen">
                         <img src="img/proyectos/cotizador.png" alt="Cotizador Web">
+                        <span class="skill-chip proyecto-tipo">Página web</span>
                     </figure>
                     <div class="proyecto-cuerpo">
                         <h3>Cotizador Web</h3>
-                        <p>
-                            Página web estática (HTML, CSS y JavaScript sin dependencias) que permite generar una cotización estimada para el desarrollo de un sitio web.
-                        </p>
+                        <p>Página web estática (HTML, CSS y JavaScript sin dependencias) que permite generar una cotización estimada para el desarrollo de un sitio web.</p>
+                        <ul class="bento-chips">
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                        </ul>
                         <div class="proyecto-enlaces">
-                            <a href="https://regitoro.github.io/cotizador-web/" target="_blank" rel="noopener noreferrer">Ver aquí</a>
-                            <a href="https://github.com/regitoro/cotizador-web" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
+                            <a href="https://regitoro.github.io/cotizador-web/" target="_blank" rel="noopener noreferrer">Ver aquí <span aria-hidden="true">↗</span></a>
+                            <a href="https://github.com/regitoro/cotizador-web" target="_blank" rel="noopener noreferrer">Ver repo de Git <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
                 </article>
-
-                
 
             </div>
         </section>

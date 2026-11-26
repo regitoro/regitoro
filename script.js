@@ -1647,3 +1647,285 @@ document.querySelectorAll(".dato-imagen img, .proyecto-imagen img").forEach((img
 
     acomodar();
 })();
+
+/* ---------- Tarjetas estilo bento (Sobre mí y Datos curiosos) ---------- */
+(() => {
+    const tarjetas = [...document.querySelectorAll(".bento-card")];
+    if (!tarjetas.length) return;
+
+    // Brillo que sigue al cursor dentro de cada tarjeta
+    tarjetas.forEach((t) => {
+        t.addEventListener("pointermove", (e) => {
+            const r = t.getBoundingClientRect();
+            t.style.setProperty("--mx", `${e.clientX - r.left}px`);
+            t.style.setProperty("--my", `${e.clientY - r.top}px`);
+        });
+    });
+
+    // Aparición escalonada cuando las tarjetas entran en pantalla
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const obs = new IntersectionObserver((entradas) => {
+        entradas.forEach((e) => {
+            if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                obs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(".bento, .datos, .proyectos").forEach((grupo) => {
+        grupo.classList.add("bento-anim");
+        [...grupo.querySelectorAll(".bento-card")].forEach((t, i) => {
+            t.style.setProperty("--d", `${(i % 4) * 80}ms`);
+            obs.observe(t);
+        });
+    });
+})();
+
+/* ---------- Pila de fotos (Datos curiosos) ---------- */
+// Toma la foto de enfrente con el cursor (o el dedo) y aviéntala hacia cualquier lado:
+// se va al fondo de la pila y aparece la que estaba detrás.
+// Un clic (o Enter / flecha derecha) también pasa a la siguiente; flecha izquierda regresa.
+document.querySelectorAll(".pila").forEach((pila) => {
+    const tarjeta = pila.closest(".dato");
+    const contador = tarjeta?.querySelector(".pila-contador");
+    const todas = [...pila.querySelectorAll(".pila-foto")];
+    let orden = [...todas]; // orden[0] = la foto de enfrente
+
+    const UMBRAL = 80;   // px que hay que arrastrar para mandarla al fondo
+    const VISIBLES = 4;  // cuántas fotos se alcanzan a ver en la pila
+
+    // Cómo se ve cada lugar de la pila (0 = enfrente). Las de atrás asoman por los lados.
+    const lugares = [
+        "translate(0, 0) rotate(0deg)",
+        "translate(22px, -14px) rotate(7deg) scale(0.96)",
+        "translate(-24px, -22px) rotate(-8deg) scale(0.92)",
+        "translate(12px, -32px) rotate(12deg) scale(0.88)",
+    ];
+
+    function acomodar() {
+        const n = orden.length;
+        orden.forEach((f, p) => {
+            f.style.setProperty("--t", lugares[Math.min(p, VISIBLES - 1)]);
+            f.style.zIndex = n - p;
+            f.classList.toggle("atras", p > 0);
+            f.classList.toggle("oculta", p >= VISIBLES);
+            f.setAttribute("aria-hidden", p !== 0);
+        });
+        if (contador && orden[0]) {
+            contador.textContent = `${todas.indexOf(orden[0]) + 1} / ${todas.length}`;
+        }
+    }
+
+    function siguiente() {
+        if (orden.length < 2) return;
+        orden.push(orden.shift());
+        acomodar();
+    }
+
+    function anterior() {
+        if (orden.length < 2) return;
+        orden.unshift(orden.pop());
+        acomodar();
+    }
+
+    // Si una imagen no existe, se quita de la pila
+    todas.forEach((f) => {
+        const img = f.querySelector("img");
+        const quitar = () => {
+            f.remove();
+            todas.splice(todas.indexOf(f), 1);
+            orden = orden.filter((x) => x !== f);
+            acomodar();
+        };
+        img.addEventListener("error", quitar, { once: true });
+        if (img.complete && img.naturalWidth === 0) quitar();
+    });
+
+    // ----- Arrastrar -----
+    let tomada = null;
+    let x0 = 0, y0 = 0, dx = 0, dy = 0;
+
+    pila.addEventListener("pointerdown", (e) => {
+        if (e.button !== 0 || !orden[0] || !orden[0].contains(e.target)) return;
+        tomada = orden[0];
+        x0 = e.clientX;
+        y0 = e.clientY;
+        dx = dy = 0;
+        try { pila.setPointerCapture(e.pointerId); } catch {}
+        tomada.classList.add("tomada");
+        tarjeta?.classList.add("arrastrando");
+    });
+
+    pila.addEventListener("pointermove", (e) => {
+        if (!tomada) return;
+        dx = e.clientX - x0;
+        dy = e.clientY - y0;
+        tomada.style.transform = `translate(${dx}px, ${dy}px) rotate(${dx * 0.06}deg)`;
+    });
+
+    function soltar(cancelado) {
+        if (!tomada) return;
+        const foto = tomada;
+        tomada = null;
+        foto.classList.remove("tomada");
+        foto.style.transform = ""; // vuelve a usar --t (con animación)
+
+        const distancia = Math.hypot(dx, dy);
+        if (!cancelado && (distancia > UMBRAL || distancia < 5)) {
+            siguiente(); // arrastre largo o clic → al fondo de la pila
+        }
+        // Quita el "por encima" cuando termine de acomodarse
+        setTimeout(() => tarjeta?.classList.remove("arrastrando"), 550);
+    }
+
+    pila.addEventListener("pointerup", () => soltar(false));
+    pila.addEventListener("pointercancel", () => soltar(true));
+
+    // ----- Teclado -----
+    pila.addEventListener("keydown", (e) => {
+        if (["ArrowRight", "Enter", " "].includes(e.key)) {
+            e.preventDefault();
+            siguiente();
+        } else if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            anterior();
+        }
+    });
+
+    acomodar();
+});
+
+/* ---------- Proyectos: masonry ---------- */
+// Columnas del mismo ancho; cada tarjeta mide lo que necesita su descripción.
+// Para que todas las columnas terminen a la misma altura (sin huecos), las
+// imágenes de las columnas más cortas se estiran un poco (se recortan con object-fit).
+(() => {
+    const cont = document.querySelector(".proyectos");
+    if (!cont) return;
+    const tarjetas = [...cont.querySelectorAll(".proyecto")];
+    const GAP = 18;
+    let columnas = [];
+    let anchoAnterior = 0;
+
+    const numColumnas = () => {
+        const w = cont.clientWidth;
+        return w >= 640 ? 2 : 1; // 2 columnas (1 en celular)
+    };
+
+    const alto = (el) => el.getBoundingClientRect().height;
+
+    function soltarImagenes() {
+        tarjetas.forEach((t) => {
+            const f = t.querySelector(".proyecto-imagen");
+            f.style.height = "";
+            f.style.aspectRatio = "";
+        });
+    }
+
+    // Reparte las tarjetas en columnas buscando la combinación en la que las
+    // imágenes se tengan que estirar lo menos posible (el orden se respeta dentro de cada columna)
+    function repartir(n) {
+        tarjetas.forEach((t) => cont.appendChild(t));
+        columnas.forEach((c) => c.remove());
+        columnas = Array.from({ length: n }, () => {
+            const c = document.createElement("div");
+            c.className = "proyectos-col";
+            cont.appendChild(c);
+            return c;
+        });
+        cont.classList.add("masonry");
+
+        // Todas las columnas miden lo mismo de ancho: se mide cada tarjeta una vez
+        tarjetas.forEach((t) => columnas[0].appendChild(t));
+        const h = tarjetas.map((t) => alto(t) + GAP);
+
+        let mejor = null;
+        let mejorCosto = Infinity;
+        const k = tarjetas.length;
+
+        if (n > 1 && Math.pow(n, k) <= 250000) {
+            // Prueba todas las combinaciones
+            const asignacion = new Array(k).fill(0);
+            const total = Math.pow(n, k);
+            for (let combo = 0; combo < total; combo++) {
+                let x = combo;
+                const sum = new Array(n).fill(0);
+                const cuenta = new Array(n).fill(0);
+                for (let i = 0; i < k; i++) {
+                    const c = x % n;
+                    x = (x - c) / n;
+                    asignacion[i] = c;
+                    sum[c] += h[i];
+                    cuenta[c]++;
+                }
+                if (cuenta.includes(0)) continue;
+                const max = Math.max(...sum);
+                // Costo: lo más que se estira una imagen + un poquito por el total estirado
+                let peor = 0;
+                let totalEstirado = 0;
+                for (let c = 0; c < n; c++) {
+                    const porImagen = (max - sum[c]) / cuenta[c];
+                    peor = Math.max(peor, porImagen);
+                    totalEstirado += max - sum[c];
+                }
+                const costo = peor + totalEstirado * 0.01;
+                if (costo < mejorCosto) {
+                    mejorCosto = costo;
+                    mejor = [...asignacion];
+                }
+            }
+        }
+
+        if (!mejor) {
+            // Demasiados proyectos para probar todo: a la columna más corta
+            const alturas = new Array(n).fill(0);
+            mejor = h.map((hi) => {
+                const c = alturas.indexOf(Math.min(...alturas));
+                alturas[c] += hi;
+                return c;
+            });
+        }
+
+        tarjetas.forEach((t, i) => columnas[mejor[i]].appendChild(t));
+    }
+
+    // Estira las imágenes de las columnas cortas hasta igualar la más alta
+    function emparejar() {
+        if (columnas.length < 2) return;
+        const alturas = columnas.map(alto);
+        const max = Math.max(...alturas);
+        columnas.forEach((c, i) => {
+            const faltan = max - alturas[i];
+            if (faltan < 1) return;
+            const figuras = [...c.querySelectorAll(".proyecto-imagen")];
+            const extra = faltan / figuras.length;
+            figuras.forEach((f) => {
+                const h = alto(f);
+                f.style.aspectRatio = "auto";
+                f.style.height = `${h + extra}px`;
+            });
+        });
+    }
+
+    function acomodar() {
+        anchoAnterior = cont.clientWidth;
+        soltarImagenes();
+        const n = numColumnas();
+        if (n !== columnas.length) repartir(n);
+        emparejar();
+    }
+
+    acomodar();
+    document.fonts?.ready.then(acomodar);
+    window.addEventListener("load", acomodar);
+
+    // Solo se vuelve a acomodar si cambia el ancho (no por los cambios de alto que hacemos aquí)
+    let pendiente = 0;
+    new ResizeObserver(() => {
+        if (cont.clientWidth === anchoAnterior) return;
+        cancelAnimationFrame(pendiente);
+        pendiente = requestAnimationFrame(acomodar);
+    }).observe(cont);
+})();
