@@ -2,34 +2,70 @@
 const splitFlap = document.querySelector(".split-flap");
 
 const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-let intervalo;
 
-function animarTexto() {
+// Anima cualquier elemento: letras al azar que se van "acomodando" hasta formar el texto final
+function animarTexto(elemento, texto = elemento.dataset.texto || elemento.textContent) {
+    elemento.dataset.texto = texto;
     let iteracion = 0;
 
-    clearInterval(intervalo);
+    clearInterval(elemento._intervalo);
 
-    intervalo = setInterval(() => {
-        splitFlap.textContent = "REGINA"
+    elemento._intervalo = setInterval(() => {
+        elemento.textContent = texto
             .split("")
             .map((letra, indice) => {
-                if (indice < iteracion) {
-                    return "REGINA"[indice];
+                // los espacios se quedan como espacios
+                if (indice < iteracion || letra === " ") {
+                    return letra;
                 }
 
-                return letras[Math.floor(Math.random() * letras.length)];
+                const azar = letras[Math.floor(Math.random() * letras.length)];
+                return letra === letra.toLowerCase() ? azar.toLowerCase() : azar;
             })
             .join("");
 
-        if (iteracion >= "REGINA".length) {
-            clearInterval(intervalo);
+        if (iteracion >= texto.length) {
+            clearInterval(elemento._intervalo);
         }
 
         iteracion += 0.3;
     }, 120);
 }
 
-animarTexto();
+animarTexto(splitFlap, "REGINA");
+
+// Títulos de los apartados: cada letra aparece una tras otra (subiendo y desenfocada → nítida)
+const titulosAnimados = document.querySelectorAll(".titulo-animado");
+
+titulosAnimados.forEach((titulo) => {
+    const texto = titulo.textContent.trim();
+    let i = 0;
+
+    titulo.setAttribute("aria-label", texto);
+    titulo.innerHTML = texto
+        .split(" ")
+        .map((palabra) =>
+            `<span class="ta-palabra" aria-hidden="true">` +
+            [...palabra].map((letra) => `<span class="ta-letra" style="--i:${i++}">${letra}</span>`).join("") +
+            `</span>`
+        )
+        .join(" ");
+});
+
+if ("IntersectionObserver" in window) {
+    const observadorTitulos = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+            if (entrada.isIntersecting) {
+                entrada.target.classList.add("visible");
+                observadorTitulos.unobserve(entrada.target);
+            }
+        });
+    }, { threshold: 0.6 });
+
+    titulosAnimados.forEach((titulo) => observadorTitulos.observe(titulo));
+} else {
+    titulosAnimados.forEach((titulo) => titulo.classList.add("visible"));
+}
 
 
 

@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <canvas id="galaxia" aria-hidden="true"></canvas>
+
     <div id="fluid-container">
         <canvas id="fluid"></canvas>
     </div>
@@ -71,7 +73,7 @@
         </section>
 
         <section id="sobre-mi" class="seccion">
-            <h2>Sobre mí</h2>
+            <h2 class="titulo-animado">Sobre mí</h2>
 
             <!-- Apartado para escribir cosas sobre mí -->
             <div class="sobre-mi">
@@ -108,7 +110,7 @@
         </section>
 
         <section id="habilidades" class="seccion">
-            <h2>Habilidades</h2>
+            <h2 class="titulo-animado">Habilidades</h2>
 
             <p>
                 Algunas habilidades, las cuales he ido adquiriendo a lo largo de mi formación académica y experiencia práctica.
@@ -258,7 +260,7 @@
         </section>
 
         <section id="datos-curiosos" class="seccion">
-            <h2>Datos curiosos</h2>
+            <h2 class="titulo-animado">Datos curiosos</h2>
 
             <!--
                 Cada .dato tiene una imagen y un párrafo. Se alternan solos:
@@ -274,7 +276,7 @@
                         <!-- si subo una imagen png, cambiar el .jpg por .png -->
                     </figure>
                     <div class="dato-texto">
-                        <h3>Dato curioso #1</h3>
+                        <h3>Viajes</h3>
                         <p>
                             Me gusta viajar, quiero recorrer el mundo y concer muchos lugares nuevos
                         </p>
@@ -286,7 +288,7 @@
                         <img src="img/datos-curiosos/horses.jpeg" alt="yo y caballos lol">
                     </figure>
                     <div class="dato-texto">
-                        <h3>Dato curioso #2</h3>
+                        <h3>Deporte</h3>
                         <p>
                             Practiqué equitación desde los 6 hasta aproximadamente los 16 años. Es mi deporte favorito, aunque ya no lo practico. :(( 
                         </p>
@@ -298,9 +300,9 @@
                         <img src="img/datos-curiosos/tigrees.JPG" alt="foto">
                     </figure>
                     <div class="dato-texto">
-                        <h3>Dato curioso #3</h3>
+                        <h3>Fotografía</h3>
                         <p>
-                           me gusta la fotografia
+                           Me gusta capturar momentos y lugares
                         </p>
                     </div>
                 </article>
@@ -310,7 +312,7 @@
         </section>
 
         <section id="proyectos" class="seccion">
-            <h2>Mis proyectos</h2>
+            <h2 class="titulo-animado">Mis proyectos</h2>
 
             <!--
                 Cada tarjeta: imagen arriba, título y descripción, y dos enlaces.
@@ -485,7 +487,7 @@
 
 
         <section id="contacto" class="seccion contacto">
-            <h2>Contacto</h2>
+            <h2 class="titulo-animado">Contacto</h2>
 
             <p>
                 instagram: toro_regina y github: regitoro
@@ -501,6 +503,7 @@
     </footer>
 
     <script src="mapa-mexico.js"></script>
+    <script src="galaxia.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

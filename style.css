@@ -121,8 +121,7 @@ nav a:hover::after {
     padding: 80px 8%;
     background:
         radial-gradient(circle at 85% 20%, rgba(34, 211, 238, 0.14), transparent 45%),
-        radial-gradient(circle at 10% 90%, rgba(59, 130, 246, 0.16), transparent 50%),
-        var(--fondo);
+        radial-gradient(circle at 10% 90%, rgba(59, 130, 246, 0.16), transparent 50%);
 }
 
 .inicio-contenido {
@@ -278,15 +277,17 @@ nav a:hover::after {
 
 /* ---------- Sobre mí ---------- */
 
-/* El contorno solo rodea al texto; el álbum queda afuera */
+/* Recuadro del texto (sin contorno); el álbum queda afuera */
 .sobre-mi p {
     margin: 0;
     background-color: var(--superficie);
-    border: 1px dashed var(--azul);
     border-radius: 14px;
     padding: 32px;
     color: var(--texto-suave);
     font-size: 1.05rem;
+    text-align: justify;
+    text-align-last: center;
+    hyphens: auto;
 }
 
 /* Texto a la izquierda, álbum a la derecha */
@@ -1003,4 +1004,47 @@ footer {
   width: 100vw;
   height: 100vh;
   display: block;
+}
+/* ---------- Títulos de los apartados: letras que aparecen escalonadas ---------- */
+.titulo-animado .ta-palabra {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.titulo-animado .ta-letra {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(0.6em);
+    transition:
+        opacity 0.5s ease,
+        filter 0.5s ease,
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--i) * 45ms);
+}
+
+.titulo-animado.visible .ta-letra {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .titulo-animado .ta-letra {
+        opacity: 1;
+        filter: none;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* ---------- Fondo de galaxia (galaxia.js) ---------- */
+#galaxia {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    display: block;
 }
