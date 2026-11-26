@@ -112,26 +112,227 @@ nav a:hover::after {
     transform: scaleX(1);
 }
 
-/* ---------- Inicio ---------- */
+/* ---------- Inicio (portada) ---------- */
+/* Texto a la izquierda y Saturno de partículas a la derecha (saturno.js).
+   Detrás: una nebulosa rosa/violeta y una cuadrícula de puntos muy tenue. */
 
-.inicio {
-    min-height: 85vh;
+.hero {
+    position: relative;
+    min-height: calc(100vh - 70px);
     display: flex;
     align-items: center;
-    padding: 80px 8%;
+    padding: 40px 6%;
+    overflow: hidden;
+    isolation: isolate;
     background:
-        radial-gradient(circle at 85% 20%, rgba(34, 211, 238, 0.14), transparent 45%),
-        radial-gradient(circle at 10% 90%, rgba(59, 130, 246, 0.16), transparent 50%);
+        linear-gradient(90deg, rgba(12, 4, 12, 0.75) 0%, rgba(12, 4, 12, 0.35) 45%, transparent 75%);
 }
 
-.inicio-contenido {
-    max-width: var(--ancho);
+/* Nebulosa: dos manchas de luz difuminadas en diagonal (como en la referencia) */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10% -20% 35%;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse 38% 22% at 62% 18%, rgba(139, 92, 246, 0.55), transparent 70%),
+        radial-gradient(ellipse 30% 18% at 80% 32%, rgba(168, 85, 247, 0.35), transparent 70%),
+        radial-gradient(ellipse 36% 20% at 78% 86%, rgba(219, 42, 196, 0.45), transparent 70%),
+        radial-gradient(ellipse 26% 16% at 95% 70%, rgba(231, 108, 215, 0.3), transparent 70%);
+    transform: rotate(-18deg);
+    filter: blur(40px);
+    pointer-events: none;
+    animation: nebulosa 14s ease-in-out infinite alternate;
+}
+
+@keyframes nebulosa {
+    from { transform: rotate(-18deg) translateY(0); opacity: 0.85; }
+    to   { transform: rotate(-14deg) translateY(-2%); opacity: 1; }
+}
+
+/* Cuadrícula de puntitos que se desvanece hacia los bordes */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(rgba(231, 108, 215, 0.16) 1px, transparent 1.4px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse at 30% 50%, #000 10%, transparent 70%);
+    mask-image: radial-gradient(ellipse at 30% 50%, #000 10%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-contenido {
     width: 100%;
+    max-width: 1360px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1.15fr;
-    gap: 48px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
     align-items: center;
+    gap: clamp(40px, 6vw, 110px); /* separación entre el texto y Saturno */
+}
+
+/* Entrada escalonada del texto */
+.hero-texto > * {
+    opacity: 0;
+    animation: subir 1s var(--curva) forwards;
+}
+.hero-texto > :nth-child(1) { animation-delay: 0.2s; }
+.hero-texto > :nth-child(2) { animation-delay: 0.45s; }
+.hero-texto > :nth-child(3) { animation-delay: 0.7s; }
+.hero-texto > :nth-child(4) { animation-delay: 0.9s; }
+
+.hero-nombre {
+    font-family: "Sora", system-ui, sans-serif;
+    font-size: clamp(2.6rem, 6.2vw, 5.6rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    color: #f7f0f7;
+    white-space: nowrap;
+    text-shadow: 0 0 40px rgba(231, 108, 215, 0.18);
+    margin-bottom: 22px;
+}
+
+/* SISTEMAS × CÓDIGO × LIDERAZGO */
+.hero-roles {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.2em 0.55em;
+    font-family: "Sora", system-ui, sans-serif;
+    font-size: clamp(0.95rem, 2vw, 1.75rem);
+    font-weight: 300;
+    letter-spacing: 0.32em;
+    margin-bottom: 30px;
+}
+
+.rol {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.rol-1 { background-image: linear-gradient(90deg, #c4a1ff, #e76cd7); }
+.rol-2 { background-image: linear-gradient(90deg, #f08ae0, #fbe0f6); }
+.rol-3 { background-image: linear-gradient(90deg, #e76cd7, #a78bfa); }
+
+.hero-x {
+    color: var(--texto-suave);
+    font-weight: 300;
+    letter-spacing: 0;
+}
+
+/* Línea fina con un destello que la recorre */
+.hero-linea {
+    position: relative;
+    width: min(100%, 620px);
+    height: 1px;
+    background: rgba(147, 160, 194, 0.22);
+    margin-bottom: 22px;
+    overflow: hidden;
+}
+
+.hero-linea::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90px;
+    height: 100%;
+    background: var(--degradado);
+    box-shadow: 0 0 12px var(--cian);
+    animation: destello 5s var(--curva) 1.5s infinite;
+}
+
+@keyframes destello {
+    0%   { transform: translateX(0); }
+    60%  { transform: translateX(calc(min(100vw, 620px) - 90px)); }
+    100% { transform: translateX(0); }
+}
+
+.hero-datos {
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: clamp(0.68rem, 1vw, 0.8rem);
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+}
+
+.hero-datos span {
+    margin: 0 0.5em;
+    color: var(--cian);
+}
+
+/* Lugar del Saturno */
+.hero-saturno {
+    position: relative;
+    width: 100%;
+    height: min(86vh, 760px);
+    min-height: 400px;
+}
+
+.hero-saturno canvas {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+/* Si el navegador no tiene WebGL, se queda solo el texto */
+.hero-saturno.sin-webgl {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        padding-top: 56px;
+        padding-bottom: 24px;
+    }
+
+    .hero-contenido {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 0;
+    }
+
+    .hero-nombre {
+        white-space: normal;
+    }
+
+    .hero-roles {
+        justify-content: center;
+    }
+
+    .hero-linea {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-saturno {
+        height: 58vh;
+        min-height: 320px;
+    }
+
+    .hero::before {
+        inset: 10% -30% -10% -10%;
+    }
+}
+
+/* El mapa va debajo del texto de Sobre mí */
+.sobre-mi-columna {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.sobre-mi-columna .mapa {
+    opacity: 1;
+    animation: none;
 }
 
 /* ---------- Mapa de México (a un lado del saludo) ---------- */
@@ -244,6 +445,14 @@ nav a:hover::after {
     transform: scale(1.08);
 }
 
+/* Botón apagado cuando ya no se puede acercar / alejar más */
+.mapa-controles button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    background-color: rgba(30, 10, 28, 0.8);
+    transform: none;
+}
+
 .mapa-controles button:focus-visible {
     outline: 2px solid var(--cian);
     outline-offset: 2px;
@@ -296,6 +505,79 @@ nav a:hover::after {
     grid-template-columns: 1fr 300px;
     gap: 80px;
     align-items: center;
+}
+
+/* ---------- Estudios (dentro de Sobre mí) ---------- */
+
+.estudios {
+    margin-top: 64px;
+}
+
+.estudios-titulo {
+    font-size: 1.4rem;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.estudios-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+}
+
+.estudio {
+    background-color: var(--superficie);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.35s var(--curva), box-shadow 0.35s var(--curva);
+}
+
+.estudio:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* Lugar para la imagen; si falta, se ve el degradado */
+.estudio-imagen {
+    aspect-ratio: 16 / 9;
+    background: var(--degradado);
+}
+
+.estudio-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.estudio-info {
+    padding: 22px 26px 26px;
+}
+
+.estudio-nivel {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--cian);
+    margin-bottom: 6px;
+}
+
+.estudio-info h4 {
+    font-family: "Sora", system-ui, sans-serif;
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+}
+
+.estudio-lugar {
+    color: var(--texto-suave);
+}
+
+.estudio-fecha {
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+    opacity: 0.8;
 }
 
 /* ---------- Álbum de fotos apiladas ---------- */
@@ -421,48 +703,6 @@ nav a:hover::after {
     border-radius: 4px;
 }
 
-.saludo {
-    color: var(--cian);
-    font-weight: 500;
-    margin-bottom: 8px;
-}
-
-.inicio h1 {
-    font-size: clamp(3rem, 9vw, 6.5rem);
-    font-weight: 700;
-    background: var(--degradado);
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    margin-bottom: 12px;
-}
-
-.inicio h2 {
-    font-size: clamp(1.2rem, 3vw, 1.7rem);
-    font-weight: 400;
-    color: var(--texto);
-    margin-bottom: 12px;
-}
-
-.inicio p:not(.saludo) {
-    max-width: 550px;
-    margin-bottom: 32px;
-    color: var(--texto-suave);
-}
-
-/* Única animación automática: la entrada del inicio, escalonada */
-.inicio-texto > * {
-    opacity: 0;
-    animation: subir 0.8s var(--curva) forwards;
-}
-.inicio-texto > :nth-child(1) { animation-delay: 0.1s; }
-.inicio-texto > :nth-child(2) { animation-delay: 0.25s; }
-.inicio-texto > :nth-child(3) { animation-delay: 0.4s; }
-.inicio-texto > :nth-child(4) { animation-delay: 0.55s; }
-.inicio-texto > :nth-child(5) { animation-delay: 0.7s; }
-
 @keyframes subir {
     from {
         opacity: 0;
@@ -555,15 +795,15 @@ nav a:hover::after {
     margin-top: 48px;
 }
 
-/* ---------- Habilidades e idiomas ---------- */
-/* Estilo minimalista: barras delgadas, fuente pequeña y compacta.
-   Para cambiar la fuente de esta sección, edita --fuente-niveles. */
+/* ---------- Habilidades (tarjetas) ---------- */
+/* Cada tarjeta: ícono + categoría arriba, nombre, "Dominio" con porcentaje y una barra.
+   El color de cada categoría se define abajo con --c1 (claro) y --c2 (oscuro). */
 
 #habilidades {
     --fuente-niveles: "Inter", "Segoe UI", system-ui, sans-serif;
 }
 
-/* Cada bloque (blandas, técnicas, idiomas) con su título fuera de la tarjeta */
+/* Cada bloque (técnicas, blandas, idiomas) con su título */
 .grupo-habilidades {
     margin-top: 48px;
 }
@@ -578,7 +818,7 @@ nav a:hover::after {
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--texto-suave);
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 }
 
 /* línea fina que se extiende a la derecha del título */
@@ -589,109 +829,153 @@ nav a:hover::after {
     background: linear-gradient(90deg, rgba(231, 108, 215, 0.35), transparent);
 }
 
-/* Tarjetas de habilidades técnicas (una por categoría) */
-.niveles {
+.skills {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 18px;
 }
 
-.tarjeta-niveles {
-    background-color: var(--superficie);
-    /* border: 1px solid rgba(231, 108, 215, 0.12); */
-    border-radius: 10px;
-    padding: 18px 20px;
-    transition: border-color 0.3s ease;
-}
+/* Colores por categoría (todos dentro de la paleta rosa / violeta del sitio) */
+.cat-prog   { --c1: #f08ae0; --c2: #db2ac4; }  /* magenta */
+.cat-web    { --c1: #c4a1ff; --c2: #8b5cf6; }  /* violeta */
+.cat-db     { --c1: #a5b4fc; --c2: #6366f1; }  /* índigo */
+.cat-tool   { --c1: #f9a8d4; --c2: #ec4899; }  /* rosa */
+.cat-so     { --c1: #d8b4fe; --c2: #a855f7; }  /* lila */
+.cat-blanda { --c1: #fbcfe8; --c2: #e76cd7; }  /* rosa claro */
+.cat-idioma { --c1: #c7d2fe; --c2: #818cf8; }  /* lavanda */
 
-.tarjeta-niveles:hover {
-    border-color: rgba(231, 108, 215, 0.4);
-}
-
-.tarjeta-niveles h4 {
-    font-family: var(--fuente-niveles);
-    color: var(--cian);
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-}
-
-.lista-niveles {
-    list-style: none;
+.skill {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    padding: 22px 22px 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(231, 108, 215, 0.12);
+    /* resplandor suave del color de la categoría en la esquina */
+    background:
+        radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--c2) 14%, transparent), transparent 55%),
+        rgba(55, 15, 51, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition:
+        transform 0.35s var(--curva),
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
-/* Habilidades blandas e idiomas: varias barras por fila dentro de una sola tarjeta */
-.lista-dos-columnas,
-.lista-tres-columnas {
-    display: grid;
-    gap: 8px 20px;
+.skill:hover {
+    transform: translateY(-6px);
+    border-color: color-mix(in srgb, var(--c1) 55%, transparent);
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.45),
+        0 0 24px color-mix(in srgb, var(--c2) 25%, transparent);
 }
 
-.lista-dos-columnas {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.lista-tres-columnas {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-
-/* Cada habilidad es una barra delgada.
-   script.js crea dos capas iguales: la de abajo con texto claro sobre fondo oscuro
-   y la de arriba (el relleno) con fondo claro y texto oscuro, recortada al nivel. */
-.nivel {
-    position: relative;
-    height: 24px;
-    border-radius: 5px;
-    background-color: rgba(30, 10, 27, 0.6);
-    overflow: hidden;
-}
-
-.nivel-capa {
-    position: absolute;
-    inset: 0;
+.skill-arriba {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0 10px;
-    color: var(--texto-suave);
-    font-family: var(--fuente-niveles);
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 22px;
 }
 
-/* El relleno claro. El nivel lo pone script.js en --nivel */
-.nivel-relleno {
-    background: linear-gradient(90deg, #e9a6df, #fbe0f6);
-    color: #370f33;
-    clip-path: inset(0 100% 0 0);
-    transition: clip-path 1.2s var(--curva);
-}
-
-.nivel.lleno .nivel-relleno {
-    clip-path: inset(0 calc(100% - var(--nivel) * 1%) 0 0);
-}
-
-.nivel-icono {
+/* Cuadrito del ícono */
+.skill-icono {
     display: grid;
     place-items: center;
-    flex-shrink: 0;
-    width: 12px;
-    font-size: 0.75rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    border: 1px solid rgba(231, 108, 215, 0.18);
+    background-color: rgba(20, 6, 18, 0.6);
+    font-size: 1.5rem;
     line-height: 1;
+    color: var(--c1);
+    transition: transform 0.35s var(--curva);
 }
 
-/* Nombres largos ("Organización y gestión del tiempo") no rompen la barra */
-.nivel-nombre {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+.skill:hover .skill-icono {
+    transform: scale(1.08) rotate(-4deg);
+}
+
+/* GitHub y Linux vienen en negro: los pintamos claros */
+.skill-icono .devicon-github-original,
+.skill-icono .devicon-linux-plain {
+    color: var(--texto);
+}
+
+.skill-emoji {
+    font-size: 1.35rem;
+}
+
+.skill-codigo {
+    font-family: "Sora", system-ui, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--c1);
+}
+
+/* Etiqueta de la categoría (arriba a la derecha) */
+.skill-chip {
+    font-family: var(--fuente-niveles);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--texto-suave);
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(231, 108, 215, 0.2);
+    background-color: rgba(20, 6, 18, 0.4);
     white-space: nowrap;
+}
+
+.skill-nombre {
+    font-family: "Sora", system-ui, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--texto);
+    margin-bottom: 18px;
+    line-height: 1.25;
+}
+
+.skill-dominio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: auto; /* barra siempre abajo aunque el nombre ocupe 2 líneas */
+    margin-bottom: 8px;
+    font-family: var(--fuente-niveles);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--texto-suave);
+}
+
+.skill-porcentaje {
+    font-weight: 600;
+    color: var(--c1);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Barra: el ancho lo pone script.js en --nivel */
+.skill-barra {
+    height: 6px;
+    border-radius: 999px;
+    background-color: rgba(20, 6, 18, 0.7);
     overflow: hidden;
-    text-overflow: ellipsis;
+}
+
+.skill-barra span {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--c2) 45%, #3a2a4a), var(--c1));
+    box-shadow: 0 0 10px color-mix(in srgb, var(--c1) 50%, transparent);
+    transition: width 1.4s var(--curva);
+}
+
+.skill.lleno .skill-barra span {
+    width: calc(var(--nivel) * 1%);
 }
 
 /* ---------- Datos curiosos ---------- */
@@ -900,6 +1184,44 @@ nav a:hover::after {
     margin-bottom: 28px;
 }
 
+/* Logos de las redes: se agrandan un poquito al pasar el cursor */
+.redes {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 32px;
+}
+
+.redes a {
+    display: block;
+    border-radius: 12px;
+}
+
+.redes img {
+    display: block;
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    transition: transform 0.3s var(--curva), filter 0.3s ease;
+}
+
+.redes a:hover img,
+.redes a:focus-visible img {
+    transform: scale(1.18);
+    filter: drop-shadow(0 6px 14px rgba(231, 108, 215, 0.45));
+}
+
+/* El logo de GitHub es negro: lo pasamos a blanco para que se vea en el fondo oscuro */
+.redes img.logo-claro {
+    filter: invert(1);
+}
+
+.redes a:hover img.logo-claro,
+.redes a:focus-visible img.logo-claro {
+    filter: invert(1) drop-shadow(0 6px 14px rgba(231, 108, 215, 0.45));
+}
+
 /* ---------- Footer ---------- */
 
 footer {
@@ -921,12 +1243,6 @@ footer {
         gap: 16px;
     }
 
-    .inicio-contenido {
-        grid-template-columns: 1fr;
-        gap: 32px;
-    }
-
-    .inicio,
     .seccion {
         padding-left: 6%;
         padding-right: 6%;
@@ -953,6 +1269,11 @@ footer {
         max-width: 240px;
     }
 
+    /* Tarjetas de estudios una debajo de otra */
+    .estudios-tarjetas {
+        grid-template-columns: 1fr;
+    }
+
     .seccion {
         padding-top: 64px;
         padding-bottom: 64px;
@@ -973,8 +1294,8 @@ footer {
         transition-duration: 0.01ms !important;
     }
 
-    .inicio-texto > *,
-    .mapa {
+    .mapa,
+    .hero-texto > * {
         opacity: 1;
     }
 }

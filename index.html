@@ -9,7 +9,7 @@
     <!-- Fuente compacta para las barras de habilidades -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -36,18 +36,45 @@
 
     <main>
 
-        <section id="inicio" class="inicio">
-            <div class="inicio-contenido">
-                <div class="inicio-texto">
-                    <p class="saludo">Hola, mi nombre es:</p>
-                    <h1 class="split-flap">REGINA</h1>
-                    <h2>Estudiante de Ingeniería en Sistemas</h2>
-                    <p>
-                        UVAQ
+        <!-- Portada: texto a la izquierda y Saturno de partículas a la derecha (saturno.js) -->
+        <section id="inicio" class="inicio hero">
+            <div class="hero-contenido">
+                <div class="hero-texto">
+                    <h1 class="hero-nombre">REGINA TORO</h1>
+                    <p class="hero-roles">
+                        <span class="rol rol-1">SISTEMAS</span>
+                        <span class="hero-x" aria-hidden="true">×</span>
+                        <span class="rol rol-2">CÓDIGO</span>
+                        <span class="hero-x" aria-hidden="true">×</span>
+                        <span class="rol rol-3">LIDERAZGO</span>
                     </p>
-
-                    <a href="#proyectos" class="boton">Ver proyectos</a>
+                    <div class="hero-linea" aria-hidden="true"></div>
+                    <p class="hero-datos">
+                        Ingeniería en Sistemas <span aria-hidden="true">•</span>
+                        UVAQ <span aria-hidden="true">•</span>
+                        Morelia, México
+                    </p>
                 </div>
+
+                <!-- Aquí se dibuja Saturno (canvas de three.js) -->
+                <div class="hero-saturno" id="saturno" aria-hidden="true"></div>
+            </div>
+        </section>
+
+        <section id="sobre-mi" class="seccion">
+            <h2 class="titulo-animado">Sobre mí</h2>
+
+            <!-- Apartado para escribir cosas sobre mí -->
+            <div class="sobre-mi">
+                <div class="sobre-mi-columna">
+                <p>
+                    Actualmente soy estudiante de Ingeniería en Sistemas en la Universidad Vasco de Quiroga (UVAQ).
+                    Tengo 20 años y me encuentro en búsqueda de una oportunidad laboral que me permita adquirir experiencia profesional, desarrollar mis habilidades y poner en práctica los conocimientos que he adquirido durante mi formación académica.
+
+                    Dentro de la universidad participo activamente en diferentes organizaciones estudiantiles, desempeñando cargos como tesorera de la Rama Estudiantil de Ingeniería en Sistemas, secretaria de COPAREMX y presidenta de la rama de afinidad Women in Engineering (WIE).
+
+                    Estas experiencias me han permitido desarrollar habilidades de liderazgo, comunicación, organización, administración de recursos, trabajo en equipo y resolución de problemas. Me considero una persona proactiva, responsable, comprometida y con muchas ganas de aprender, asumir nuevos retos y aportar valor al equipo de trabajo.
+                </p>
 
                 <!-- Mapa interactivo de México: rueda del mouse / pellizco para zoom, arrastrar para mover -->
                 <figure class="mapa" id="mapa">
@@ -69,22 +96,7 @@
                     <div class="mapa-tooltip" aria-hidden="true"></div>
                     <figcaption>📍 Estoy en Morelia, Michoacán</figcaption>
                 </figure>
-            </div>
-        </section>
-
-        <section id="sobre-mi" class="seccion">
-            <h2 class="titulo-animado">Sobre mí</h2>
-
-            <!-- Apartado para escribir cosas sobre mí -->
-            <div class="sobre-mi">
-                <p>
-                    Actualmente soy estudiante de Ingeniería en Sistemas en la Universidad Vasco de Quiroga (UVAQ). 
-                    Tengo 20 años y me encuentro en búsqueda de una oportunidad laboral que me permita adquirir experiencia profesional, desarrollar mis habilidades y poner en práctica los conocimientos que he adquirido durante mi formación académica.
-
-                    Dentro de la universidad participo activamente en diferentes organizaciones estudiantiles, desempeñando cargos como tesorera de la Rama Estudiantil de Ingeniería en Sistemas, secretaria de COPAREMX y presidenta de la rama de afinidad Women in Engineering (WIE).
-
-                    Estas experiencias me han permitido desarrollar habilidades de liderazgo, comunicación, organización, administración de recursos, trabajo en equipo y resolución de problemas. Me considero una persona proactiva, responsable, comprometida y con muchas ganas de aprender, asumir nuevos retos y aportar valor al equipo de trabajo.
-                </p>
+                </div>
 
                 <!-- Álbum de fotos: agrega o quita <figure> (de 5 a 8 se ve bien).
                      Pon tus fotos en img/sobre-mi/ y cambia el src y el texto. -->
@@ -93,9 +105,9 @@
                         <figure class="album-foto"><img src="img/sobre-mi/foto1.jpg" alt="Foto 1"><figcaption>Foto 1</figcaption></figure>
                         <figure class="album-foto"><img src="img/sobre-mi/foto2.jpg" alt="Foto 2"><figcaption>Foto 2</figcaption></figure>
                         <figure class="album-foto"><img src="img/sobre-mi/foto3.jpg" alt="Foto 3"><figcaption>Foto 3</figcaption></figure>
-                        <figure class="album-foto"><img src="img/sobre-mi/foto4.jpg" alt="Foto 4"><figcaption>Foto 4</figcaption></figure>
-                        <figure class="album-foto"><img src="img/sobre-mi/foto5.jpg" alt="Foto 5"><figcaption>Foto 5</figcaption></figure>
-                        <figure class="album-foto"><img src="img/sobre-mi/foto6.jpg" alt="Foto 6"><figcaption>Foto 6</figcaption></figure>
+                        <figure class="album-foto"><img src="img/sobre-mi/ropec2026.jpeg" alt="Foto 4"><figcaption>Foto 4</figcaption></figure>
+                        <figure class="album-foto"><img src="img/sobre-mi/wie.jpeg" alt="Foto 5"><figcaption>Foto 5</figcaption></figure>
+                        <figure class="album-foto"><img src="img/sobre-mi/coparmex.jpeg" alt="Foto 6"><figcaption>Foto 6</figcaption></figure>
                     </div>
                     <div class="album-controles">
                         <button type="button" class="album-flecha" data-dir="-1" aria-label="Foto anterior">
@@ -105,6 +117,36 @@
                             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
                         </button>
                     </div>
+                </div>
+            </div>
+
+            <!-- Estudios: cambia el src de cada imagen (ponlas en img/sobre-mi/) y el texto -->
+            <div class="estudios">
+                <h3 class="estudios-titulo">Estudios</h3>
+                <div class="estudios-tarjetas">
+                    <article class="estudio">
+                        <div class="estudio-imagen">
+                            <img src="img/sobre-mi/universidad.png" alt="Universidad Vasco de Quiroga">
+                        </div>
+                        <div class="estudio-info">
+                            <span class="estudio-nivel">Universidad</span>
+                            <h4>Ingeniería en Sistemas</h4>
+                            <p class="estudio-lugar">Universidad Vasco de Quiroga (UVAQ)</p>
+                            <p class="estudio-fecha">2024 – Actualidad</p>
+                        </div>
+                    </article>
+
+                    <article class="estudio">
+                        <div class="estudio-imagen">
+                            <img src="img/sobre-mi/prepa.jpg" alt="Preparatoria">
+                        </div>
+                        <div class="estudio-info">
+                            <span class="estudio-nivel">Preparatoria</span>
+                            <h4>Bachillerato</h4>
+                            <p class="estudio-lugar">UVAQ </p>
+                            <p class="estudio-fecha">2021 – 2024</p>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -117,146 +159,248 @@
             </p>
 
             <!--
-                Para cambiar un nivel, edita solo el número de data-nivel (0 a 100).
-                El relleno de la barra se actualiza solo (el número no se muestra).
-                Íconos: busca el nombre en https://devicon.dev (ej. devicon-python-plain).
+                Cada habilidad es una tarjeta <article class="skill ...">.
+                - data-nivel: el porcentaje (0 a 100). El número y la barra se llenan solos.
+                - La clase cat-... elige el color: cat-prog, cat-web, cat-db, cat-tool, cat-so, cat-blanda, cat-idioma.
+                - Íconos: busca el nombre en https://devicon.dev (ej. devicon-python-plain colored).
             -->
 
-            <!-- 1. Habilidades blandas -->
-            <div class="grupo-habilidades">
-                <h3 class="grupo-titulo">Habilidades blandas</h3>
-                <article class="tarjeta-niveles">
-                    <ul class="lista-niveles lista-dos-columnas">
-                        <li class="nivel" data-nivel="85">
-                            <span class="nivel-nombre">Comunicación efectiva</span>
-                        </li>
-                        <li class="nivel" data-nivel="90">
-                            <span class="nivel-nombre">Trabajo en equipo</span>
-                        </li>
-                        <li class="nivel" data-nivel="85">
-                            <span class="nivel-nombre">Liderazgo</span>
-                        </li>
-                        <li class="nivel" data-nivel="80">
-                            <span class="nivel-nombre">Resolución de problemas</span>
-                        </li>
-                        <li class="nivel" data-nivel="80">
-                            <span class="nivel-nombre">Adaptabilidad</span>
-                        </li>
-                        <li class="nivel" data-nivel="85">
-                            <span class="nivel-nombre">Organización y gestión del tiempo</span>
-                        </li>
-                        <li class="nivel" data-nivel="75">
-                            <span class="nivel-nombre">Pensamiento crítico</span>
-                        </li>
-                        <li class="nivel" data-nivel="80">
-                            <span class="nivel-nombre">Creatividad</span>
-                        </li>
-                    </ul>
-                </article>
-            </div>
-
-            <!-- 2. Habilidades técnicas: una tarjeta por categoría -->
+            <!-- 1. Habilidades técnicas -->
             <div class="grupo-habilidades">
                 <h3 class="grupo-titulo">Habilidades técnicas</h3>
-                <div class="niveles">
-                <article class="tarjeta-niveles">
-                    <h4>Programación</h4>
-                    <ul class="lista-niveles">
-                        <li class="nivel" data-nivel="60">
-                            <span class="nivel-icono"><i class="devicon-java-plain"></i></span>
-                            <span class="nivel-nombre">Java</span>
-                        </li>
-                        <li class="nivel" data-nivel="45">
-                            <span class="nivel-icono"><i class="devicon-python-plain"></i></span>
-                            <span class="nivel-nombre">Python</span>
-                        </li>
-                        <li class="nivel" data-nivel="40">
-                            <span class="nivel-icono"><i class="devicon-javascript-plain"></i></span>
-                            <span class="nivel-nombre">JavaScript</span>
-                        </li>
-                    </ul>
-                </article>
-                <article class="tarjeta-niveles">
-                    <h4>Desarrollo web</h4>
-                    <ul class="lista-niveles">
-                        <li class="nivel" data-nivel="50">
-                            <span class="nivel-icono"><i class="devicon-html5-plain"></i></span>
-                            <span class="nivel-nombre">HTML</span>
-                        </li>
-                        <li class="nivel" data-nivel="45">
-                            <span class="nivel-icono"><i class="devicon-css3-plain"></i></span>
-                            <span class="nivel-nombre">CSS</span>
-                        </li>
-                    </ul>
-                </article>
-                <article class="tarjeta-niveles">
-                    <h4>Bases de datos</h4>
-                    <ul class="lista-niveles">
-                        <li class="nivel" data-nivel="40">
-                            <span class="nivel-icono"><i class="devicon-mysql-plain"></i></span>
-                            <span class="nivel-nombre">MySQL</span>
-                        </li>
-                        <li class="nivel" data-nivel="30">
-                            <span class="nivel-icono"><i class="devicon-postgresql-plain"></i></span>
-                            <span class="nivel-nombre">PostgreSQL</span>
-                        </li>
-                    </ul>
-                </article>
-                <article class="tarjeta-niveles">
-                    <h4>Herramientas</h4>
-                    <ul class="lista-niveles">
-                        <li class="nivel" data-nivel="55">
-                            <span class="nivel-icono"><i class="devicon-git-plain"></i></span>
-                            <span class="nivel-nombre">Git</span>
-                        </li>
-                        <li class="nivel" data-nivel="60">
-                            <span class="nivel-icono"><i class="devicon-github-original"></i></span>
-                            <span class="nivel-nombre">GitHub</span>
-                        </li>
-                        <li class="nivel" data-nivel="55">
-                            <span class="nivel-icono"><i class="devicon-intellij-plain"></i></span>
-                            <span class="nivel-nombre">IntelliJ IDEA</span>
-                        </li>
-                        <li class="nivel" data-nivel="70">
-                            <span class="nivel-icono"><i class="devicon-vscode-plain"></i></span>
-                            <span class="nivel-nombre">Visual Studio Code</span>
-                        </li>
-                    </ul>
-                </article>
-                <article class="tarjeta-niveles">
-                    <h4>Sistemas operativos</h4>
-                    <ul class="lista-niveles">
-                        <li class="nivel" data-nivel="80">
-                            <span class="nivel-icono"><i class="devicon-windows8-original"></i></span>
-                            <span class="nivel-nombre">Windows</span>
-                        </li>
-                        <li class="nivel" data-nivel="40">
-                            <span class="nivel-icono"><i class="devicon-linux-plain"></i></span>
-                            <span class="nivel-nombre">Linux</span>
-                        </li>
-                    </ul>
-                </article>
+                <div class="skills">
+                    <article class="skill cat-prog" data-nivel="60">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><i class="devicon-java-plain colored"></i></span>
+                            <span class="skill-chip">Programación</span>
+                        </div>
+                        <h4 class="skill-nombre">Java</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-prog" data-nivel="25">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><i class="devicon-python-plain colored"></i></span>
+                            <span class="skill-chip">Programación</span>
+                        </div>
+                        <h4 class="skill-nombre">Python</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-prog" data-nivel="40">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><i class="devicon-javascript-plain colored"></i></span>
+                            <span class="skill-chip">Programación</span>
+                        </div>
+                        <h4 class="skill-nombre">JavaScript</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-web" data-nivel="50">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><i class="devicon-html5-plain colored"></i></span>
+                            <span class="skill-chip">Web</span>
+                        </div>
+                        <h4 class="skill-nombre">HTML</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-web" data-nivel="45">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><i class="devicon-css3-plain colored"></i></span>
+                            <span class="skill-chip">Web</span>
+                        </div>
+                        <h4 class="skill-nombre">CSS</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-db" data-nivel="40">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><i class="devicon-mysql-plain colored"></i></span>
+                            <span class="skill-chip">Base de datos</span>
+                        </div>
+                        <h4 class="skill-nombre">MySQL</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-db" data-nivel="40">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><i class="devicon-postgresql-plain colored"></i></span>
+                            <span class="skill-chip">Base de datos</span>
+                        </div>
+                        <h4 class="skill-nombre">PostgreSQL</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-tool" data-nivel="65">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><i class="devicon-git-plain colored"></i></span>
+                            <span class="skill-chip">Herramienta</span>
+                        </div>
+                        <h4 class="skill-nombre">Git</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-tool" data-nivel="60">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><i class="devicon-github-original"></i></span>
+                            <span class="skill-chip">Herramienta</span>
+                        </div>
+                        <h4 class="skill-nombre">GitHub</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-tool" data-nivel="55">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><i class="devicon-intellij-plain colored"></i></span>
+                            <span class="skill-chip">Herramienta</span>
+                        </div>
+                        <h4 class="skill-nombre">IntelliJ IDEA</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-tool" data-nivel="70">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><i class="devicon-vscode-plain colored"></i></span>
+                            <span class="skill-chip">Herramienta</span>
+                        </div>
+                        <h4 class="skill-nombre">VS Code</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-so" data-nivel="90">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><i class="devicon-windows8-original colored"></i></span>
+                            <span class="skill-chip">Sistema</span>
+                        </div>
+                        <h4 class="skill-nombre">Windows</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-so" data-nivel="40">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><i class="devicon-linux-plain"></i></span>
+                            <span class="skill-chip">Sistema</span>
+                        </div>
+                        <h4 class="skill-nombre">Linux</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- 2. Habilidades blandas -->
+            <div class="grupo-habilidades">
+                <h3 class="grupo-titulo">Habilidades blandas</h3>
+                <div class="skills">
+                    <article class="skill cat-blanda" data-nivel="75">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><span class="skill-emoji">💬</span></span>
+                            <span class="skill-chip">Blanda</span>
+                        </div>
+                        <h4 class="skill-nombre">Comunicación efectiva</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-blanda" data-nivel="90">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><span class="skill-emoji">🤝</span></span>
+                            <span class="skill-chip">Blanda</span>
+                        </div>
+                        <h4 class="skill-nombre">Trabajo en equipo</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-blanda" data-nivel="75">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><span class="skill-emoji">⭐</span></span>
+                            <span class="skill-chip">Blanda</span>
+                        </div>
+                        <h4 class="skill-nombre">Liderazgo</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-blanda" data-nivel="80">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><span class="skill-emoji">🧩</span></span>
+                            <span class="skill-chip">Blanda</span>
+                        </div>
+                        <h4 class="skill-nombre">Resolución de problemas</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-blanda" data-nivel="90">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><span class="skill-emoji">🔄</span></span>
+                            <span class="skill-chip">Blanda</span>
+                        </div>
+                        <h4 class="skill-nombre">Adaptabilidad</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-blanda" data-nivel="65">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><span class="skill-emoji">🗓️</span></span>
+                            <span class="skill-chip">Blanda</span>
+                        </div>
+                        <h4 class="skill-nombre">Organización y gestión del tiempo</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-blanda" data-nivel="65">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><span class="skill-emoji">🧠</span></span>
+                            <span class="skill-chip">Blanda</span>
+                        </div>
+                        <h4 class="skill-nombre">Pensamiento crítico</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-blanda" data-nivel="70">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><span class="skill-emoji">🎨</span></span>
+                            <span class="skill-chip">Blanda</span>
+                        </div>
+                        <h4 class="skill-nombre">Creatividad</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
                 </div>
             </div>
 
             <!-- 3. Idiomas -->
             <div class="grupo-habilidades">
                 <h3 class="grupo-titulo">Idiomas</h3>
-                <article class="tarjeta-niveles">
-                    <ul class="lista-niveles lista-tres-columnas">
-                        <li class="nivel" data-nivel="100">
-                            <span class="nivel-nombre">Español</span>
-                        </li>
-                        <li class="nivel" data-nivel="80">
-                            <span class="nivel-nombre">Inglés</span>
-                        </li>
-                        <li class="nivel" data-nivel="30">
-                            <span class="nivel-nombre">Italiano</span>
-                        </li>
-                    </ul>
-                </article>
+                <div class="skills">
+                    <article class="skill cat-idioma" data-nivel="100">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><span class="skill-codigo">ES</span></span>
+                            <span class="skill-chip">Nativo</span>
+                        </div>
+                        <h4 class="skill-nombre">Español</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-idioma" data-nivel="80">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><span class="skill-codigo">EN</span></span>
+                            <span class="skill-chip">Avanzado</span>
+                        </div>
+                        <h4 class="skill-nombre">Inglés</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                    <article class="skill cat-idioma" data-nivel="20">
+                        <div class="skill-arriba">
+                            <span class="skill-icono"><span class="skill-codigo">IT</span></span>
+                            <span class="skill-chip">Básico</span>
+                        </div>
+                        <h4 class="skill-nombre">Italiano</h4>
+                        <div class="skill-dominio"><span>Dominio</span><span class="skill-porcentaje">0%</span></div>
+                        <div class="skill-barra"><span></span></div>
+                    </article>
+                </div>
             </div>
-
         </section>
 
         <section id="datos-curiosos" class="seccion">
@@ -338,7 +482,7 @@
                             y la simulación avanza cada cierto tiempo hasta llegar al final del día.
                         </p>
                         <div class="proyecto-enlaces">
-                            <a href="#" target="_blank" rel="noopener noreferrer">Ver aquí</a>
+                            <!-- <a href="#" target="_blank" rel="noopener noreferrer">Ver aquí</a> -->
                             <!-- cambiar el # por el link del proyecto -->
                             <a href="https://github.com/regitoro/tamagotchi" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
                         </div>
@@ -356,7 +500,7 @@
                             Está hecho con Next.js y React, usa PostgreSQL como base de datos y bcryptjs para cifrar las contraseñas.
                         </p>
                         <div class="proyecto-enlaces">
-                            <a href="#" target="_blank" rel="noopener noreferrer">Ver aquí</a>
+                            <a href="https://regi-server.tail25aba8.ts.net/" target="_blank" rel="noopener noreferrer">Ver aquí</a>
                             <a href="https://github.com/regitoro/Reproductor-de-Musica" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
                         </div>
                     </div>
@@ -374,7 +518,7 @@
                             Está desarrollado en Java puro con Swing/AWT, utilizando javax.sound.sampled para el audio, ImageIO para las imágenes y archivos JSON para almacenar la historia.
                         </p>
                         <div class="proyecto-enlaces">
-                            <a href="#" target="_blank" rel="noopener noreferrer">Ver aquí</a>
+                            <a href="https://youtu.be/ATUv9P8xVKA" target="_blank" rel="noopener noreferrer">YouTube</a>
                             <a href="#" target="_blank" rel="noopener noreferrer">Ver repo de Git</a>
                         </div>
                     </div>
@@ -385,7 +529,7 @@
                         <img src="img/proyectos/multiplayer.png" alt="Juego 1 vs 1">
                     </figure>
                     <div class="proyecto-cuerpo">
-                        <h3>proyecto</h3>
+                        <h3>Metal Night vs Kirby</h3>
                         <p>
                             Juego de pelea multijugador 1 vs 1 en tiempo real con personajes como Metal Night y Kirby,creado con Node.js, Express, Socket.IO y HTML5 Canvas, con servidor autoritativo.
                         </p>
@@ -490,18 +634,50 @@
             <h2 class="titulo-animado">Contacto</h2>
 
             <p>
-                instagram: toro_regina y github: regitoro
+                ¿Quieres trabajar conmigo o platicar? Encuéntrame aquí:
             </p>
 
-            <a href="https://github.com/regitoro" class="boton">Mi GitHub</a>
+            <!-- Redes de contacto: cambia los href que dicen TU_... por tus datos.
+                 WhatsApp: https://wa.me/ + lada del país + número, sin espacios ni signos.
+                 Ejemplo México: https://wa.me/5214431234567 -->
+            <ul class="redes">
+                <li>
+                    <a href="www.linkedin.com/in/regina-toro-b6785541b" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <img src="img/contacto/linkedin.webp" alt="LinkedIn">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/regitoro" target="_blank" rel="noopener" aria-label="GitHub">
+                        <img src="img/contacto/github.svg" alt="GitHub" class="logo-claro">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://profile.indeed.com/?hl=es_MX&co=MX&from=gnav-homepage" target="_blank" rel="noopener" aria-label="Indeed">
+                        <img src="img/contacto/indeed.webp" alt="Indeed">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/toro_regina" target="_blank" rel="noopener" aria-label="Instagram">
+                        <img src="img/contacto/insta.webp" alt="Instagram">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wa.me/524766057?text=Hola%20Regina%2C%20vi%20tu%20portafolio" target="_blank" rel="noopener" aria-label="WhatsApp">
+                        <img src="img/contacto/whats.webp" alt="WhatsApp">
+                    </a>
+                </li>
+            </ul>
         </section>
 
     </main>
 
     <footer>
-        <p>© 2026 Tu Nombre - Mi Portafolio</p>
+        <p>© 2026 Regina - Mi Portafolio</p>
     </footer>
 
+    <!-- three.js (para el Saturno de partículas) -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+    <script src="saturno.js"></script>
     <script src="mapa-mexico.js"></script>
     <script src="galaxia.js"></script>
     <script src="script.js"></script>

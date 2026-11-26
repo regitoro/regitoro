@@ -32,7 +32,7 @@ function animarTexto(elemento, texto = elemento.dataset.texto || elemento.textCo
     }, 120);
 }
 
-animarTexto(splitFlap, "REGINA");
+if (splitFlap) animarTexto(splitFlap, "REGINA");
 
 // Títulos de los apartados: cada letra aparece una tras otra (subiendo y desenfocada → nítida)
 const titulosAnimados = document.querySelectorAll(".titulo-animado");
@@ -1310,46 +1310,62 @@ function init() {
 window.addEventListener("load", init);
 
 
-// ---------- Barras de porcentaje (habilidades e idiomas) ----------
-// Lee data-nivel de cada .nivel y llena la barra cuando aparece en pantalla.
-// El número no se muestra: solo el relleno representa el nivel.
-const niveles = document.querySelectorAll(".nivel");
+// ---------- Tarjetas de habilidades ----------
+// Lee data-nivel de cada .skill: cuando la tarjeta aparece en pantalla,
+// la barra se llena y el porcentaje cuenta de 0 hasta el nivel.
+const skills = document.querySelectorAll(".skill");
+const sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-niveles.forEach((nivel) => {
-    const valor = Math.max(0, Math.min(100, Number(nivel.dataset.nivel) || 0));
-    const nombre = nivel.querySelector(".nivel-nombre")?.textContent.trim() || "";
+skills.forEach((skill) => {
+    const valor = Math.max(0, Math.min(100, Number(skill.dataset.nivel) || 0));
+    const nombre = skill.querySelector(".skill-nombre")?.textContent.trim() || "";
+    const barra = skill.querySelector(".skill-barra");
 
-    // Dos capas iguales: base (texto claro) y relleno (fondo claro, texto oscuro)
-    const contenido = nivel.innerHTML;
-    nivel.innerHTML =
-        `<div class="nivel-capa nivel-base">${contenido}</div>` +
-        `<div class="nivel-capa nivel-relleno" aria-hidden="true">${contenido}</div>`;
-
-    nivel.style.setProperty("--nivel", valor);
-    nivel.setAttribute("role", "meter");
-    nivel.setAttribute("aria-valuemin", "0");
-    nivel.setAttribute("aria-valuemax", "100");
-    nivel.setAttribute("aria-valuenow", valor);
-    nivel.setAttribute("aria-label", nombre);
+    skill.style.setProperty("--nivel", valor);
+    if (barra) {
+        barra.setAttribute("role", "meter");
+        barra.setAttribute("aria-valuemin", "0");
+        barra.setAttribute("aria-valuemax", "100");
+        barra.setAttribute("aria-valuenow", valor);
+        barra.setAttribute("aria-label", `${nombre}: ${valor}%`);
+    }
 });
 
-function llenarBarra(nivel) {
-    nivel.classList.add("lleno");
+function llenarSkill(skill) {
+    const valor = Number(skill.style.getPropertyValue("--nivel")) || 0;
+    const texto = skill.querySelector(".skill-porcentaje");
+    skill.classList.add("lleno");
+    if (!texto) return;
+
+    if (sinMovimiento) {
+        texto.textContent = valor + "%";
+        return;
+    }
+
+    const dur = 1400;
+    const t0 = performance.now();
+    const paso = (t) => {
+        const p = Math.min(1, (t - t0) / dur);
+        const suave = 1 - Math.pow(1 - p, 3);
+        texto.textContent = Math.round(valor * suave) + "%";
+        if (p < 1) requestAnimationFrame(paso);
+    };
+    requestAnimationFrame(paso);
 }
 
 if ("IntersectionObserver" in window) {
-    const observador = new IntersectionObserver((entradas) => {
+    const observadorSkills = new IntersectionObserver((entradas) => {
         entradas.forEach((entrada) => {
             if (entrada.isIntersecting) {
-                llenarBarra(entrada.target);
-                observador.unobserve(entrada.target);
+                llenarSkill(entrada.target);
+                observadorSkills.unobserve(entrada.target);
             }
         });
     }, { threshold: 0.4 });
 
-    niveles.forEach((nivel) => observador.observe(nivel));
+    skills.forEach((skill) => observadorSkills.observe(skill));
 } else {
-    niveles.forEach(llenarBarra);
+    skills.forEach(llenarSkill);
 }
 
 
@@ -1383,7 +1399,10 @@ document.querySelectorAll(".dato-imagen img, .proyecto-imagen img").forEach((img
     const H = datos.alto;
     const [moreliaX, moreliaY] = datos.morelia;
     const ZOOM_MIN = 1;
-    const ZOOM_MAX = 14;
+    const ZOOM_MAX = 8; // más cerca ya no se acerca (evita que el mapa falle)
+    const PASO_ZOOM = 1.8;
+    const botonAcercar = figura.querySelector('[data-zoom="in"]');
+    const botonAlejar = figura.querySelector('[data-zoom="out"]');
 
     svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
 
@@ -1410,6 +1429,9 @@ document.querySelectorAll(".dato-imagen img, .proyecto-imagen img").forEach((img
         capaZoom.setAttribute("transform", `translate(${vista.x} ${vista.y}) scale(${vista.k})`);
         // El punto se queda del mismo tamaño, solo cambia de lugar
         punto.setAttribute("transform", `translate(${moreliaX * vista.k + vista.x} ${moreliaY * vista.k + vista.y})`);
+        // Desactivar los botones cuando ya no se puede acercar / alejar más
+        if (botonAcercar) botonAcercar.disabled = vista.k >= ZOOM_MAX - 0.01;
+        if (botonAlejar) botonAlejar.disabled = vista.k <= ZOOM_MIN + 0.01;
     };
 
     // Zoom manteniendo fijo el punto (cx, cy) del mapa
@@ -1442,7 +1464,12 @@ document.querySelectorAll(".dato-imagen img, .proyecto-imagen img").forEach((img
         animacion = requestAnimationFrame(paso);
     };
 
-    const centrarEn = (px, py, k) => ({ k, x: W / 2 - px * k, y: H / 2 - py * k });
+    // Primero se limita el zoom y luego se calcula la posición con ese zoom,
+    // así el destino no "brinca" al corregirse
+    const centrarEn = (px, py, k) => {
+        k = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, k));
+        return { k, x: W / 2 - px * k, y: H / 2 - py * k };
+    };
 
     // Pasar coordenadas de pantalla a coordenadas del SVG
     const aSvg = (clientX, clientY) => {
@@ -1528,8 +1555,9 @@ document.querySelectorAll(".dato-imagen img, .proyecto-imagen img").forEach((img
         boton.addEventListener("click", () => {
             const accion = boton.dataset.zoom;
             const c = [(W / 2 - vista.x) / vista.k, (H / 2 - vista.y) / vista.k]; // centro visible
-            if (accion === "in") animarA(centrarEn(c[0], c[1], vista.k * 1.8));
-            if (accion === "out") animarA(centrarEn(c[0], c[1], vista.k / 1.8));
+            // Acercar siempre va hacia el puntito de Morelia
+            if (accion === "in") animarA(centrarEn(moreliaX, moreliaY, vista.k * PASO_ZOOM));
+            if (accion === "out") animarA(centrarEn(c[0], c[1], vista.k / PASO_ZOOM));
             if (accion === "morelia") animarA(centrarEn(moreliaX, moreliaY, 6));
             if (accion === "reset") animarA({ k: 1, x: 0, y: 0 });
         });
